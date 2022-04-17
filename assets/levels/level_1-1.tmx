@@ -11,7 +11,7 @@
  </layer>
  <layer id="3" name="Graphics" width="211" height="15">
   <data encoding="base64" compression="zlib">
-   eJztlktLxEAQhKOCevaRi4Inn4eVRSUg+v//li1sQ1OZmZ6XccnWBwXZZKanMulKdhgIIYSQdXIkOhaddKjRWqdlbfqn//uGuTFK7u9UdCY6d2ql7lVrpOqUQP/zWvTvs4E1e7xXvPurqdXzWeWuSf/0X4Jmqad/QtbEtJPHxh9CyMEyDcwSIa1MA7NESCuYo9osvRmtiQvR5R+MJXOmyHHOvNq5vQjlqDZLn6Kt6MuZe1dicAG8/r8R3ZrfKf84dh/Zt/1XQnkI9SL6D/Vtbh/3IpajHP+Ypd9v0btR7Nv0IHoUvdRZLuqD3G+E1//2uuffq/Xffbzk/peQyoM9h/5jfRvrZfXf+v/Bzk/lCNcP7T9mabvThzlG/1rnSfQ8pJ/nlejaaIz4wPGjOZf7jbDj7LojXM/xr2N7+K8h5F9Zev9zwd7TNfE8+k/1LZ5H/9gbpf51vpej0HsA9x/zpvn5Nsfo/5WaSelRo7XOGsR9OFwpPWq01lmDDmUffgDxmXZI
+   eJztl9tKxEAMhkcF9dpDbxS88nixuqgUxH2Gvv/bGKGBkJ2ZzKndpf0/+NluO5P5myY9OAcAAAAskxPSKemsQYzaODVrwz/8P1bMDZFzfuekC9KlESt2rhwjFicH+N+PBf82G7Vmi/uKdX4lsVpeq9Q14R/+c+Beaum/lOGAa8/Jh6HQ2Jr85M4N+eFjwyjf8aXRj7LY2EMAWC29Qy8BUEvv0EsA1KL7qLSXPoWmQL+78/u3/J2CK9L1BGNTaHFuobmh75ohYTslfs6aTB/YttB1mzOXkd+XJfn29VFpL/2QtqRfY+5DjsEZsOr/jnQv/sf867HHyLHln/H1g68WtX9f3abWcStCfZTiX/fS/7PoSyj0bHoiPZPeyixn1UHqM8Kqf3nc8m/FOnQdz5n/HGL9IPdp/6G6DdUy+699f5DzY32k1/flX/fSdtS32Nb+Oc4L6dXFr+cN6VaoC/jQ4zuxL/UZIcfJdTt1PMU/j23hvwSff2bu/Keia4/X1Pu1/1jd6v3av66NXP883+oj331A51/3G/fPTmxr/+/QnpgWMWrjLEHIw3rFtIhRG2cJWkse/gBvYH/r
   </data>
  </layer>
  <objectgroup id="5" name="Pipes">
@@ -23,51 +23,51 @@
   <object id="23" x="2864" y="176" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="6" name="Bricks">
-  <object id="24" gid="48" x="320" y="160" width="16" height="16"/>
-  <object id="25" gid="48" x="352" y="160" width="16" height="16"/>
-  <object id="26" gid="48" x="384" y="160" width="16" height="16"/>
-  <object id="27" gid="48" x="1232" y="160" width="16" height="16"/>
-  <object id="28" gid="48" x="1264" y="160" width="16" height="16"/>
-  <object id="29" gid="48" x="1280" y="96" width="16" height="16"/>
-  <object id="30" gid="48" x="1296" y="96" width="16" height="16"/>
-  <object id="31" gid="48" x="1312" y="96" width="16" height="16"/>
-  <object id="32" gid="48" x="1328" y="96" width="16" height="16"/>
-  <object id="33" gid="48" x="1344" y="96" width="16" height="16"/>
-  <object id="34" gid="48" x="1360" y="96" width="16" height="16"/>
-  <object id="35" gid="48" x="1376" y="96" width="16" height="16"/>
-  <object id="36" gid="48" x="1392" y="96" width="16" height="16"/>
-  <object id="37" gid="48" x="1456" y="96" width="16" height="16"/>
-  <object id="38" gid="48" x="1472" y="96" width="16" height="16"/>
-  <object id="39" gid="48" x="1488" y="96" width="16" height="16"/>
-  <object id="40" gid="48" x="1504" y="160" width="16" height="16"/>
-  <object id="41" gid="48" x="1600" y="160" width="16" height="16"/>
-  <object id="42" gid="48" x="1616" y="160" width="16" height="16"/>
-  <object id="43" gid="48" x="1888" y="160" width="16" height="16"/>
-  <object id="44" gid="48" x="1936" y="96" width="16" height="16"/>
-  <object id="45" gid="48" x="1952" y="96" width="16" height="16"/>
-  <object id="46" gid="48" x="1968" y="96" width="16" height="16"/>
-  <object id="47" gid="48" x="2048" y="96" width="16" height="16"/>
-  <object id="48" gid="48" x="2064" y="160" width="16" height="16"/>
-  <object id="49" gid="48" x="2080" y="160" width="16" height="16"/>
-  <object id="50" gid="48" x="2096" y="96" width="16" height="16"/>
-  <object id="51" gid="48" x="2688" y="160" width="16" height="16"/>
-  <object id="52" gid="48" x="2704" y="160" width="16" height="16"/>
-  <object id="53" gid="48" x="2736" y="160" width="16" height="16"/>
+  <object id="24" x="320" y="144" width="16" height="16"/>
+  <object id="25" x="352" y="144" width="16" height="16"/>
+  <object id="26" x="384" y="144" width="16" height="16"/>
+  <object id="27" x="1232" y="144" width="16" height="16"/>
+  <object id="28" x="1264" y="144" width="16" height="16"/>
+  <object id="29" x="1280" y="80" width="16" height="16"/>
+  <object id="30" x="1296" y="80" width="16" height="16"/>
+  <object id="31" x="1312" y="80" width="16" height="16"/>
+  <object id="32" x="1328" y="80" width="16" height="16"/>
+  <object id="33" x="1344" y="80" width="16" height="16"/>
+  <object id="34" x="1360" y="80" width="16" height="16"/>
+  <object id="35" x="1376" y="80" width="16" height="16"/>
+  <object id="36" x="1392" y="80" width="16" height="16"/>
+  <object id="37" x="1456" y="80" width="16" height="16"/>
+  <object id="38" x="1472" y="80" width="16" height="16"/>
+  <object id="39" x="1488" y="80" width="16" height="16"/>
+  <object id="40" x="1504" y="144" width="16" height="16"/>
+  <object id="41" x="1600" y="144" width="16" height="16"/>
+  <object id="42" x="1616" y="144" width="16" height="16"/>
+  <object id="43" x="1888" y="144" width="16" height="16"/>
+  <object id="44" x="1936" y="80" width="16" height="16"/>
+  <object id="45" x="1952" y="80" width="16" height="16"/>
+  <object id="46" x="1968" y="80" width="16" height="16"/>
+  <object id="47" x="2048" y="80" width="16" height="16"/>
+  <object id="48" x="2064" y="144" width="16" height="16"/>
+  <object id="49" x="2080" y="144" width="16" height="16"/>
+  <object id="50" x="2096" y="80" width="16" height="16"/>
+  <object id="51" x="2688" y="144" width="16" height="16"/>
+  <object id="52" x="2704" y="144" width="16" height="16"/>
+  <object id="53" x="2736" y="144" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="7" name="Mystery-Blocks">
-  <object id="54" gid="79" x="256" y="160" width="16" height="16"/>
-  <object id="55" gid="79" x="336" y="160" width="16" height="16"/>
-  <object id="58" gid="79" x="352" y="96" width="16" height="16"/>
-  <object id="59" gid="79" x="368" y="160" width="16" height="16"/>
-  <object id="60" gid="79" x="1248" y="160" width="16" height="16"/>
-  <object id="61" gid="79" x="1504" y="96" width="16" height="16"/>
-  <object id="62" gid="79" x="1696" y="160" width="16" height="16"/>
-  <object id="63" gid="79" x="1744" y="160" width="16" height="16"/>
-  <object id="64" gid="79" x="1744" y="96" width="16" height="16"/>
-  <object id="65" gid="79" x="1792" y="160" width="16" height="16"/>
-  <object id="66" gid="79" x="2064" y="96" width="16" height="16"/>
-  <object id="67" gid="79" x="2080" y="96" width="16" height="16"/>
-  <object id="68" gid="79" x="2720" y="160" width="16" height="16"/>
+  <object id="54" x="256" y="144" width="16" height="16"/>
+  <object id="55" x="336" y="144" width="16" height="16"/>
+  <object id="58" x="352" y="80" width="16" height="16"/>
+  <object id="59" x="368" y="144" width="16" height="16"/>
+  <object id="60" x="1248" y="144" width="16" height="16"/>
+  <object id="61" x="1504" y="80" width="16" height="16"/>
+  <object id="62" x="1696" y="144" width="16" height="16"/>
+  <object id="63" x="1744" y="144" width="16" height="16"/>
+  <object id="64" x="1744" y="80" width="16" height="16"/>
+  <object id="65" x="1792" y="144" width="16" height="16"/>
+  <object id="66" x="2064" y="80" width="16" height="16"/>
+  <object id="67" x="2080" y="80" width="16" height="16"/>
+  <object id="68" x="2720" y="144" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="8" name="Ground">
   <object id="70" x="0" y="208" width="1104" height="32"/>
