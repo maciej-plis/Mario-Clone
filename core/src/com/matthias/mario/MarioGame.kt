@@ -7,8 +7,8 @@ import com.matthias.mario.screens.GameScreen
 class MarioGame : Game() {
 
     companion object {
-        const val V_WIDTH  = 800f
-        const val V_HEIGHT = 600f
+        const val V_WIDTH  = 416f
+        const val V_HEIGHT = 240f
     }
 
     lateinit var batch: SpriteBatch
