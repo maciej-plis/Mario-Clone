@@ -19,7 +19,6 @@ import com.matthias.mario.MarioGame.Companion.V_WIDTH
 import com.matthias.mario.scenes.Hud
 import com.matthias.mario.sprites.Mario
 import com.matthias.mario.utils.B2DWorldCreator.createWorld
-import kotlin.math.roundToInt
 
 class GameScreen(private val game: MarioGame) : ScreenAdapter() {
 
@@ -77,7 +76,7 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
             mario.body.applyLinearImpulse(Vector2(0f, 4f), mario.body.worldCenter, true)
         }
 
-        if (Gdx.input.isKeyPressed(LEFT) && mario.body.linearVelocity.x <= 2f) {
+        if (Gdx.input.isKeyPressed(LEFT) && mario.body.linearVelocity.x >= -2f) {
             mario.body.applyLinearImpulse(Vector2(-0.1f, 0f), mario.body.worldCenter, true)
         }
 
