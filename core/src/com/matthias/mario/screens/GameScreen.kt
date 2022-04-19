@@ -29,8 +29,7 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
     private val viewport = FitViewport(V_WIDTH / PPM, V_HEIGHT / PPM, camera)
     private val hud = Hud(game.batch)
 
-    private val mapLoader = TmxMapLoader()
-    private val map = mapLoader.load("levels/level_1-1.tmx")
+    private val map = TmxMapLoader().load("levels/level_1-1.tmx")
     private val mapRenderer = OrthogonalTiledMapRenderer(map, 1 / PPM)
 
     private val world = World(Vector2(0f, -10f), true)
@@ -61,6 +60,14 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
 
     override fun resize(width: Int, height: Int) {
         viewport.update(width, height)
+    }
+
+    override fun dispose() {
+        map.dispose()
+        mapRenderer.dispose()
+        world.dispose()
+        b2ddr.dispose()
+        hud.dispose()
     }
 
     private fun update(delta: Float) {

@@ -8,11 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.utils.Disposable
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.matthias.mario.MarioGame.Companion.V_HEIGHT
 import com.matthias.mario.MarioGame.Companion.V_WIDTH
 
-class Hud(spriteBatch: SpriteBatch) {
+class Hud(spriteBatch: SpriteBatch) : Disposable {
 
     val stage: Stage
 
@@ -51,5 +52,9 @@ class Hud(spriteBatch: SpriteBatch) {
             add(countdownLabel).expandX()
         }
         stage.addActor(table)
+    }
+
+    override fun dispose() {
+        stage.dispose()
     }
 }
