@@ -31,7 +31,7 @@ object B2DWorldCreator {
         for (obj in gameScreen.map.layers.get(GROUND_LAYER).rectangleObjects) {
             BODY_DEF.position.set(obj.rectangle.centerX / PPM, obj.rectangle.centerY / PPM)
             SHAPE.setAsBox(obj.rectangle.halfWidth / PPM, obj.rectangle.halfHeight / PPM)
-            gameScreen.world.createBodyWithFixture(BODY_DEF, FIXTURE_DEF)
+            gameScreen.world.createBodyWithFixtures(BODY_DEF, FIXTURE_DEF)
         }
     }
 
@@ -39,7 +39,7 @@ object B2DWorldCreator {
         for (obj in gameScreen.map.layers.get(PIPES_LAYER).rectangleObjects) {
             BODY_DEF.position.set(obj.rectangle.centerX / PPM, obj.rectangle.centerY / PPM)
             SHAPE.setAsBox(obj.rectangle.halfWidth / PPM, obj.rectangle.halfHeight / PPM)
-            gameScreen.world.createBodyWithFixture(BODY_DEF, FIXTURE_DEF)
+            gameScreen.world.createBodyWithFixtures(BODY_DEF, FIXTURE_DEF)
         }
     }
 

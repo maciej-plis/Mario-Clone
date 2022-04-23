@@ -17,6 +17,6 @@ abstract class InteractiveTile(protected val gameScreen: GameScreen, protected v
     init {
         BODY_DEF.position.set(bounds.centerX / PPM, bounds.centerY / PPM)
         SHAPE.setAsBox(bounds.halfWidth / PPM, bounds.halfHeight / PPM)
-        body = gameScreen.world.createBodyWithFixture(BODY_DEF, FIXTURE_DEF)
+        body = gameScreen.world.createBodyWithFixtures(BODY_DEF, FIXTURE_DEF)
     }
 }
