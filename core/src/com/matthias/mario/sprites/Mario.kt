@@ -6,28 +6,26 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.Body
-import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
-import com.badlogic.gdx.physics.box2d.CircleShape
-import com.badlogic.gdx.physics.box2d.EdgeShape
-import com.badlogic.gdx.physics.box2d.FixtureDef
 import com.matthias.mario.MarioGame.Companion.PPM
-import com.matthias.mario.common.createBodyWithFixtures
-import com.matthias.mario.common.findRegions
-import com.matthias.mario.common.getAtlas
+import com.matthias.mario.common.*
 import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.sprites.Mario.State.*
 import com.matthias.mario.sprites.Mario.XDirection.LEFT
 import com.matthias.mario.sprites.Mario.XDirection.RIGHT
+import ktx.box2d.body
+import ktx.box2d.circle
+import ktx.box2d.edge
 
-class Mario(private val gameScreen: GameScreen) :
-    Sprite(gameScreen.assetManager.getAtlas("mario.atlas").findRegion("mario-stand")) {
+class Mario(private val gameScreen: GameScreen) : Sprite() {
 
     enum class State { STANDING, RUNNING, JUMPING, FALLING }
     enum class XDirection { LEFT, RIGHT }
 
     private val marioAtlas: TextureAtlas = gameScreen.assetManager.getAtlas("mario.atlas")
     private val standTexture: TextureRegion
+
+    //    private val fallTexture: TextureRegion
     private val runAnimation: Animation<TextureRegion>
     private val jumpAnimation: Animation<TextureRegion>
 
@@ -41,21 +39,35 @@ class Mario(private val gameScreen: GameScreen) :
 
 
     init {
-        setBounds(body.position.x / PPM, body.position.y / PPM, width / PPM, height / PPM)
-        standTexture = marioAtlas.findRegion("mario-stand")//.apply(scaleTextureRegion)
+        standTexture = marioAtlas.findRegion("mario-stand")
+//        fallTexture = marioAtlas.findRegion("mario-fall")
 
         val runTextures = marioAtlas.findRegions("mario-run-1", "mario-run-2", "mario-run-3")
         runAnimation = Animation<TextureRegion>(0.1f, runTextures)
 
         val jumpTextures = marioAtlas.findRegions("mario-jump-1", "mario-jump-2")
         jumpAnimation = Animation<TextureRegion>(0.1f, jumpTextures)
+
+        setRegion(standTexture)
+        setSize(standTexture.regionWidth.toMeters(), standTexture.regionHeight.toMeters())
+        setOriginCenter()
+        setCenter(body.x.toMeters(), body.y.toMeters())
     }
 
     fun update(delta: Float) {
         updateDirection()
         updateState(delta)
         updateTexture()
-        setPosition(body.position.x - width / 2, body.position.y - height / 2)
+        setCenter(body.position)
+    }
+
+    private fun defineBody(): Body {
+        return gameScreen.world.body(type = DynamicBody) {
+            position.set(64f / PPM, 64f / PPM)
+            circle(radius = 6f / PPM)
+            edge(Vector2(-2f / PPM, -6f / PPM), Vector2(2f / PPM, -6f / PPM))
+            edge(Vector2(-2 / PPM, 6 / PPM), Vector2(2f / PPM, 6 / PPM))
+        }
     }
 
     private fun updateDirection() {
@@ -69,8 +81,7 @@ class Mario(private val gameScreen: GameScreen) :
     private fun updateState(delta: Float) {
         previousState = currentState
         currentState = when {
-            body.linearVelocity.y > 0 || (body.linearVelocity.y < 0 && previousState == JUMPING) -> JUMPING
-            body.linearVelocity.y < 0 -> FALLING
+            body.linearVelocity.y != 0f -> JUMPING
             body.linearVelocity.x != 0f -> RUNNING
             else -> STANDING
         }
@@ -78,12 +89,7 @@ class Mario(private val gameScreen: GameScreen) :
     }
 
     private fun updateTexture() {
-        val frame = frame.apply {
-            if((xDirection == LEFT && !isFlipX) || (xDirection == RIGHT && isFlipX)) {
-                flip(true, false)
-            }
-        }
-        setRegion(frame)
+        setRegion(frame.apply { flipToDirection(xDirection) })
     }
 
     private val frame: TextureRegion
@@ -93,17 +99,11 @@ class Mario(private val gameScreen: GameScreen) :
             JUMPING -> jumpAnimation.getKeyFrame(stateTimer)
         }
 
-    private fun defineBody(): Body {
-        val bodyDef = BodyDef().apply {
-            type = DynamicBody
-            position.set(64f / PPM, 64f / PPM)
+    private fun TextureRegion.flipToDirection(xDirection: XDirection) {
+        val facingLeftButNotFlipped = xDirection == LEFT && !isFlipX
+        val facingRightButFlipped = xDirection == LEFT && !isFlipX
+        if (facingLeftButNotFlipped || facingRightButFlipped) {
+            flip(true, false)
         }
-        val fixtureDef1 = FixtureDef().apply {
-            shape = CircleShape().apply { radius = 6f / PPM }
-        }
-        val fixtureDef2 = FixtureDef().apply {
-            shape = EdgeShape().apply { set(Vector2(-2f / PPM, -6f / PPM), Vector2(2f / PPM, -6f / PPM)) }
-        }
-        return gameScreen.world.createBodyWithFixtures(bodyDef, fixtureDef1, fixtureDef2)
     }
 }

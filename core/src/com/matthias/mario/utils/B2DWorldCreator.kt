@@ -1,13 +1,15 @@
 package com.matthias.mario.utils
 
-import com.badlogic.gdx.physics.box2d.BodyDef
-import com.badlogic.gdx.physics.box2d.FixtureDef
-import com.badlogic.gdx.physics.box2d.PolygonShape
+import com.badlogic.gdx.maps.objects.RectangleMapObject
+import com.badlogic.gdx.maps.tiled.TiledMap
+import com.badlogic.gdx.physics.box2d.Body
+import com.badlogic.gdx.physics.box2d.World
 import com.matthias.mario.MarioGame.Companion.PPM
 import com.matthias.mario.common.*
-import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.sprites.Brick
 import com.matthias.mario.sprites.MysteryBlock
+import ktx.box2d.body
+import ktx.box2d.polygon
 
 object B2DWorldCreator {
 
@@ -16,42 +18,43 @@ object B2DWorldCreator {
     private const val BRICKS_LAYER = "Bricks"
     private const val MYSTERY_BLOCKS_LAYER = "Mystery-Blocks"
 
-    val BODY_DEF = BodyDef()
-    val SHAPE = PolygonShape()
-    val FIXTURE_DEF = FixtureDef().apply { shape = SHAPE }
-
-    fun createWorld(gameScreen: GameScreen) {
-        createGroundLayer(gameScreen)
-        createPipesLayer(gameScreen)
-        createBricksLayer(gameScreen)
-        createMysteryBlockLayer(gameScreen)
+    fun createWorld(world: World, map: TiledMap) {
+        createGroundLayer(world, map)
+        createPipesLayer(world, map)
+        createBricksLayer(world, map)
+        createMysteryBlockLayer(world, map)
     }
 
-    private fun createGroundLayer(gameScreen: GameScreen) {
-        for (obj in gameScreen.map.layers.get(GROUND_LAYER).rectangleObjects) {
-            BODY_DEF.position.set(obj.rectangle.centerX / PPM, obj.rectangle.centerY / PPM)
-            SHAPE.setAsBox(obj.rectangle.halfWidth / PPM, obj.rectangle.halfHeight / PPM)
-            gameScreen.world.createBodyWithFixtures(BODY_DEF, FIXTURE_DEF)
+    fun createTileBody(world: World, obj: RectangleMapObject): Body {
+        return world.body {
+            position.set(obj.rectangle.centerX / PPM, obj.rectangle.centerY / PPM)
+            polygon {
+                it.setAsBox(obj.rectangle.halfWidth / PPM, obj.rectangle.halfHeight / PPM)
+            }
         }
     }
 
-    private fun createPipesLayer(gameScreen: GameScreen) {
-        for (obj in gameScreen.map.layers.get(PIPES_LAYER).rectangleObjects) {
-            BODY_DEF.position.set(obj.rectangle.centerX / PPM, obj.rectangle.centerY / PPM)
-            SHAPE.setAsBox(obj.rectangle.halfWidth / PPM, obj.rectangle.halfHeight / PPM)
-            gameScreen.world.createBodyWithFixtures(BODY_DEF, FIXTURE_DEF)
+    private fun createGroundLayer(world: World, map: TiledMap) {
+        for (obj in map.layers.get(GROUND_LAYER).rectangleObjects) {
+            createTileBody(world, obj)
         }
     }
 
-    private fun createBricksLayer(gameScreen: GameScreen) {
-        for (obj in gameScreen.map.layers.get(BRICKS_LAYER).rectangleObjects) {
-            Brick(gameScreen, obj.rectangle)
+    private fun createPipesLayer(world: World, map: TiledMap) {
+        for (obj in map.layers.get(PIPES_LAYER).rectangleObjects) {
+            createTileBody(world, obj)
         }
     }
 
-    private fun createMysteryBlockLayer(gameScreen: GameScreen) {
-        for (obj in gameScreen.map.layers.get(MYSTERY_BLOCKS_LAYER).rectangleObjects) {
-            MysteryBlock(gameScreen, obj.rectangle)
+    private fun createBricksLayer(world: World, map: TiledMap) {
+        for (obj in map.layers.get(BRICKS_LAYER).rectangleObjects) {
+            Brick(world, obj)
+        }
+    }
+
+    private fun createMysteryBlockLayer(world: World, map: TiledMap) {
+        for (obj in map.layers.get(MYSTERY_BLOCKS_LAYER).rectangleObjects) {
+            MysteryBlock(world, obj)
         }
     }
 }

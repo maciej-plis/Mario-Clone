@@ -18,9 +18,12 @@ import com.matthias.mario.MarioGame
 import com.matthias.mario.MarioGame.Companion.PPM
 import com.matthias.mario.MarioGame.Companion.V_HEIGHT
 import com.matthias.mario.MarioGame.Companion.V_WIDTH
+import com.matthias.mario.common.centerX
+import com.matthias.mario.common.centerY
 import com.matthias.mario.scenes.Hud
 import com.matthias.mario.sprites.Mario
 import com.matthias.mario.utils.B2DWorldCreator.createWorld
+import ktx.box2d.earthGravity
 
 class GameScreen(private val game: MarioGame) : ScreenAdapter() {
 
@@ -36,14 +39,14 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
     val map = TmxMapLoader().load("levels/level_1-1.tmx")
     private val mapRenderer = OrthogonalTiledMapRenderer(map, 1 / PPM)
 
-    val world = World(Vector2(0f, -10f), true)
+    val world = World(earthGravity, true)
     private val b2ddr = Box2DDebugRenderer()
 
     private val mario = Mario(this)
 
     init {
         camera.position.set(viewport.worldWidth / 2f, viewport.worldHeight / 2f, 0f)
-        createWorld(this)
+        createWorld(world, map)
     }
 
     override fun render(delta: Float) {
@@ -79,9 +82,11 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
         handleInput(delta)
 
         world.step(1 / 60f, 6, 2)
+
         mario.update(delta)
 
-        camera.position.x = mario.body.position.x
+
+        camera.position.x = mario.centerX
         camera.update()
         mapRenderer.setView(camera)
     }

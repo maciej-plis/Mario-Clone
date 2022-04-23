@@ -1,27 +1,16 @@
 package com.matthias.mario.common
 
 import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.maps.MapLayer
 import com.badlogic.gdx.maps.objects.RectangleMapObject
-import com.badlogic.gdx.physics.box2d.Body
-import com.badlogic.gdx.physics.box2d.BodyDef
-import com.badlogic.gdx.physics.box2d.FixtureDef
-import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.Array
-
-fun World.createBodyWithFixtures(bodyDef: BodyDef, vararg fixtureDefs: FixtureDef): Body {
-    return createBody(bodyDef).apply {
-        for (fixtureDef in fixtureDefs) {
-            createFixture(fixtureDef)
-        }
-    }
-}
+import com.matthias.mario.MarioGame.Companion.PPM
 
 val MapLayer.rectangleObjects: Array<RectangleMapObject>
     get() = this.objects.getByType(RectangleMapObject::class.java)
-
 
 fun AssetManager.getAtlas(fileName: String): TextureAtlas {
     return this.get(fileName, TextureAtlas::class.java)
@@ -39,4 +28,12 @@ fun TextureAtlas.findRegions(vararg names: String): Array<TextureRegion> {
     return names.asSequence()
         .map { findRegion(it) }
         .toArray()
+}
+
+fun Float.toMeters(): Float {
+    return this / PPM
+}
+
+fun Int.toMeters(): Float {
+    return this / PPM
 }

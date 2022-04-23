@@ -1,8 +1,8 @@
 package com.matthias.mario.sprites
 
-import com.badlogic.gdx.math.Rectangle
-import com.matthias.mario.screens.GameScreen
+import com.badlogic.gdx.maps.objects.RectangleMapObject
+import com.badlogic.gdx.physics.box2d.World
 
-class MysteryBlock(gameScreen: GameScreen, bounds: Rectangle) : InteractiveTile(gameScreen, bounds) {
+class MysteryBlock(world: World, obj: RectangleMapObject) : InteractiveTile(world, obj) {
 
 }

@@ -22,8 +22,14 @@ repositories {
 }
 
 dependencies {
+
+    // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    // LibGDX Modules
     implementation("com.badlogicgames.gdx:gdx:1.10.0")
     implementation("com.badlogicgames.gdx:gdx-box2d:1.10.0")
+
+    // LibKTX Modules
+    implementation("io.github.libktx:ktx-box2d:1.10.0-rc1")
 }
