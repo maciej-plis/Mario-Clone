@@ -1,0 +1,258 @@
+
+mario.png
+size: 128, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+mario-11
+  rotate: false
+  xy: 37, 9
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-12
+  rotate: false
+  xy: 91, 57
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-13
+  rotate: false
+  xy: 109, 111
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-14
+  rotate: false
+  xy: 109, 57
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-16
+  rotate: false
+  xy: 19, 95
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-17
+  rotate: false
+  xy: 73, 95
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-18
+  rotate: false
+  xy: 19, 27
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-19
+  rotate: false
+  xy: 1, 95
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-2
+  rotate: false
+  xy: 91, 39
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-20
+  rotate: false
+  xy: 37, 27
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+grow-shrink-4
+  rotate: false
+  xy: 37, 27
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-21
+  rotate: false
+  xy: 1, 1
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1
+mario-22
+  rotate: false
+  xy: 55, 27
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-23
+  rotate: false
+  xy: 37, 61
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-24
+  rotate: false
+  xy: 1, 61
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+grow-shrink-5
+  rotate: false
+  xy: 1, 61
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-25
+  rotate: false
+  xy: 55, 61
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-26
+  rotate: false
+  xy: 19, 61
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-27
+  rotate: false
+  xy: 73, 61
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-28
+  rotate: false
+  xy: 55, 95
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-29
+  rotate: false
+  xy: 1, 27
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-3
+  rotate: false
+  xy: 91, 75
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-4
+  rotate: false
+  xy: 73, 43
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-5
+  rotate: false
+  xy: 109, 75
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-6
+  rotate: false
+  xy: 73, 25
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-7
+  rotate: false
+  xy: 109, 39
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-8
+  rotate: false
+  xy: 109, 93
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-9
+  rotate: false
+  xy: 91, 93
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+grow-shrink-1
+  rotate: false
+  xy: 91, 111
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-1
+  rotate: false
+  xy: 91, 111
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+grow-shrink-7
+  rotate: false
+  xy: 91, 111
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+grow-shrink-2
+  rotate: false
+  xy: 19, 1
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1
+grow-shrink-3
+  rotate: false
+  xy: 37, 95
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-15
+  rotate: false
+  xy: 37, 95
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+grow-shrink-6
+  rotate: false
+  xy: 55, 9
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mario-10
+  rotate: false
+  xy: 55, 9
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1

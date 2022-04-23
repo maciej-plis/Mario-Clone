@@ -3,8 +3,10 @@ package com.matthias.mario.screens
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input.Keys.*
 import com.badlogic.gdx.ScreenAdapter
+import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.Color.BLACK
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.math.Vector2
@@ -22,6 +24,11 @@ import com.matthias.mario.utils.B2DWorldCreator.createWorld
 
 class GameScreen(private val game: MarioGame) : ScreenAdapter() {
 
+    val assetManager = AssetManager().apply {
+        load("mario.atlas", TextureAtlas::class.java)
+        finishLoading()
+    }
+
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(V_WIDTH / PPM, V_HEIGHT / PPM, camera)
     private val hud = Hud(game.batch)
@@ -32,7 +39,7 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
     val world = World(Vector2(0f, -10f), true)
     private val b2ddr = Box2DDebugRenderer()
 
-    private val mario = Mario(world)
+    private val mario = Mario(this)
 
     init {
         camera.position.set(viewport.worldWidth / 2f, viewport.worldHeight / 2f, 0f)
@@ -44,8 +51,14 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
 
         clear(BLACK)
         mapRenderer.render()
+
         b2ddr.render(world, camera.combined)
-        game.batch.projectionMatrix = hud.stage.camera.combined
+
+        game.batch.projectionMatrix = camera.combined
+        game.batch.begin()
+        mario.draw(game.batch)
+        game.batch.end()
+
         hud.stage.draw()
     }
 
@@ -59,12 +72,14 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
         world.dispose()
         b2ddr.dispose()
         hud.dispose()
+        assetManager.dispose()
     }
 
     private fun update(delta: Float) {
         handleInput(delta)
 
         world.step(1 / 60f, 6, 2)
+        mario.update(delta)
 
         camera.position.x = mario.body.position.x
         camera.update()
