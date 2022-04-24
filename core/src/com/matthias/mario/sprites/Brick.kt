@@ -2,15 +2,20 @@ package com.matthias.mario.sprites
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.maps.objects.RectangleMapObject
-import com.badlogic.gdx.physics.box2d.World
+import com.matthias.mario.common.BRICK_BIT
+import com.matthias.mario.common.DESTROYED_BIT
+import com.matthias.mario.screens.GameScreen
 
-class Brick(world: World, obj: RectangleMapObject) : InteractiveTile(world, obj) {
+class Brick(gameScreen: GameScreen, obj: RectangleMapObject) : InteractiveTile(gameScreen, obj) {
 
     init {
         fixture.userData = this
+        fixture.filterData.categoryBits = BRICK_BIT
     }
 
     override fun onHeadCollision() {
         Gdx.app.log("Brick", "Brick collided with player!")
+        fixture.filterData.categoryBits = DESTROYED_BIT
+        cell?.tile = null
     }
 }

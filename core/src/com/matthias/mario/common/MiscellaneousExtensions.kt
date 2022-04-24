@@ -37,3 +37,11 @@ fun Float.toMeters(): Float {
 fun Int.toMeters(): Float {
     return this / PPM
 }
+
+fun Float.toPixels(): Float {
+    return this * PPM
+}
+
+fun Int.toPixels(): Float {
+    return this * PPM
+}

@@ -16,6 +16,7 @@ import com.matthias.mario.sprites.Mario.XDirection.RIGHT
 import ktx.box2d.body
 import ktx.box2d.circle
 import ktx.box2d.edge
+import kotlin.experimental.or
 
 class Mario(private val gameScreen: GameScreen) : Sprite() {
 
@@ -68,8 +69,11 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
 
     private fun defineBody(): Body {
         val body = gameScreen.world.body(type = DynamicBody) { position.set(INITIAL_POSITION.x.toMeters(), INITIAL_POSITION.y.toMeters()) }
-        fixtures["body"] = body.circle(radius = 6f.toMeters())
-        fixtures["feet"] = body.edge(Vector2((-2f).toMeters(), (-6f).toMeters()), Vector2(2f.toMeters(), (-6f).toMeters()))
+        fixtures["body"] = body.circle(radius = 6f.toMeters()) {
+            filter.categoryBits = MARIO_BIT
+            filter.maskBits = DEFAULT_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT
+        }
+//        fixtures["feet"] = body.edge(Vector2((-2f).toMeters(), (-6f).toMeters()), Vector2(2f.toMeters(), (-6f).toMeters()))
         fixtures["head"] = body.edge(Vector2((-2).toMeters(), 6.toMeters()), Vector2(2f.toMeters(), 6.toMeters())) {
             isSensor = true
             userData = "head"

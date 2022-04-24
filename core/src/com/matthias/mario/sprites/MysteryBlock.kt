@@ -2,12 +2,14 @@ package com.matthias.mario.sprites
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.maps.objects.RectangleMapObject
-import com.badlogic.gdx.physics.box2d.World
+import com.matthias.mario.common.MYSTERY_BLOCK_BIT
+import com.matthias.mario.screens.GameScreen
 
-class MysteryBlock(world: World, obj: RectangleMapObject) : InteractiveTile(world, obj) {
+class MysteryBlock(gameScreen: GameScreen, obj: RectangleMapObject) : InteractiveTile(gameScreen, obj) {
 
     init {
         fixture.userData = this
+        fixture.filterData.categoryBits = MYSTERY_BLOCK_BIT
     }
 
     override fun onHeadCollision() {

@@ -49,7 +49,7 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
 
     init {
         camera.position.set(viewport.worldWidth / 2f, viewport.worldHeight / 2f, 0f)
-        createWorld(world, map)
+        createWorld(this)
     }
 
     override fun render(delta: Float) {
