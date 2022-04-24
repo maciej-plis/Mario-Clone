@@ -19,7 +19,8 @@ import com.matthias.mario.MarioGame.Companion.PPM
 import com.matthias.mario.MarioGame.Companion.V_HEIGHT
 import com.matthias.mario.MarioGame.Companion.V_WIDTH
 import com.matthias.mario.common.centerX
-import com.matthias.mario.common.centerY
+import com.matthias.mario.common.toMeters
+import com.matthias.mario.listeners.WorldContactListener
 import com.matthias.mario.scenes.Hud
 import com.matthias.mario.sprites.Mario
 import com.matthias.mario.utils.B2DWorldCreator.createWorld
@@ -33,14 +34,16 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
     }
 
     private val camera = OrthographicCamera()
-    private val viewport = FitViewport(V_WIDTH / PPM, V_HEIGHT / PPM, camera)
+    private val viewport = FitViewport(V_WIDTH.toMeters(), V_HEIGHT.toMeters(), camera)
     private val hud = Hud(game.batch)
 
     val map = TmxMapLoader().load("levels/level_1-1.tmx")
-    private val mapRenderer = OrthogonalTiledMapRenderer(map, 1 / PPM)
+    private val mapRenderer = OrthogonalTiledMapRenderer(map, 1.toMeters())
 
-    val world = World(earthGravity, true)
     private val b2ddr = Box2DDebugRenderer()
+    val world = World(earthGravity, true).apply {
+        setContactListener(WorldContactListener())
+    }
 
     private val mario = Mario(this)
 

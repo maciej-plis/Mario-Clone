@@ -25,11 +25,12 @@ object B2DWorldCreator {
         createMysteryBlockLayer(world, map)
     }
 
-    fun createTileBody(world: World, obj: RectangleMapObject): Body {
+    fun createTileBody(world: World, obj: RectangleMapObject, tile: Any? = null): Body {
         return world.body {
-            position.set(obj.rectangle.centerX / PPM, obj.rectangle.centerY / PPM)
+            position.set(obj.rectangle.centerX.toMeters(), obj.rectangle.centerY.toMeters())
             polygon {
-                it.setAsBox(obj.rectangle.halfWidth / PPM, obj.rectangle.halfHeight / PPM)
+                it.setAsBox(obj.rectangle.halfWidth.toMeters(), obj.rectangle.halfHeight.toMeters())
+                userData = tile
             }
         }
     }

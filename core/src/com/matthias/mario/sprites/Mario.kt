@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
-import com.matthias.mario.MarioGame.Companion.PPM
+import com.badlogic.gdx.physics.box2d.Fixture
 import com.matthias.mario.common.*
 import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.sprites.Mario.State.*
@@ -19,6 +19,10 @@ import ktx.box2d.edge
 
 class Mario(private val gameScreen: GameScreen) : Sprite() {
 
+    companion object {
+        val INITIAL_POSITION = Vector2(64f, 64f)
+    }
+
     enum class State { STANDING, RUNNING, JUMPING, FALLING }
     enum class XDirection { LEFT, RIGHT }
 
@@ -29,6 +33,7 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
     private val runAnimation: Animation<TextureRegion>
     private val jumpAnimation: Animation<TextureRegion>
 
+    val fixtures: MutableMap<String, Fixture> = mutableMapOf()
     val body: Body = defineBody()
 
     var currentState: State = STANDING
@@ -62,12 +67,14 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
     }
 
     private fun defineBody(): Body {
-        return gameScreen.world.body(type = DynamicBody) {
-            position.set(64f / PPM, 64f / PPM)
-            circle(radius = 6f / PPM)
-            edge(Vector2(-2f / PPM, -6f / PPM), Vector2(2f / PPM, -6f / PPM))
-            edge(Vector2(-2 / PPM, 6 / PPM), Vector2(2f / PPM, 6 / PPM))
+        val body = gameScreen.world.body(type = DynamicBody) { position.set(INITIAL_POSITION.x.toMeters(), INITIAL_POSITION.y.toMeters()) }
+        fixtures["body"] = body.circle(radius = 6f.toMeters())
+        fixtures["feet"] = body.edge(Vector2((-2f).toMeters(), (-6f).toMeters()), Vector2(2f.toMeters(), (-6f).toMeters()))
+        fixtures["head"] = body.edge(Vector2((-2).toMeters(), 6.toMeters()), Vector2(2f.toMeters(), 6.toMeters())) {
+            isSensor = true
+            userData = "head"
         }
+        return body
     }
 
     private fun updateDirection() {
@@ -101,7 +108,7 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
 
     private fun TextureRegion.flipToDirection(xDirection: XDirection) {
         val facingLeftButNotFlipped = xDirection == LEFT && !isFlipX
-        val facingRightButFlipped = xDirection == LEFT && !isFlipX
+        val facingRightButFlipped = xDirection == RIGHT && isFlipX
         if (facingLeftButNotFlipped || facingRightButFlipped) {
             flip(true, false)
         }
