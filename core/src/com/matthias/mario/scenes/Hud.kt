@@ -10,8 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Disposable
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.matthias.mario.MarioGame.Companion.V_HEIGHT
-import com.matthias.mario.MarioGame.Companion.V_WIDTH
+import com.matthias.mario.V_HEIGHT
+import com.matthias.mario.V_WIDTH
+import com.matthias.mario.common.toMeters
 
 class Hud(spriteBatch: SpriteBatch) : Disposable {
 
@@ -29,7 +30,7 @@ class Hud(spriteBatch: SpriteBatch) : Disposable {
     private val marioLabel: Label
 
     init {
-        val viewport = FitViewport(V_WIDTH, V_HEIGHT, OrthographicCamera())
+        val viewport = FitViewport(V_WIDTH.toMeters(), V_HEIGHT.toMeters(), OrthographicCamera())
         stage = Stage(viewport, spriteBatch)
 
         val labelStyle = LabelStyle(BitmapFont(), WHITE)

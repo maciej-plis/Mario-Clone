@@ -1,13 +1,12 @@
 package com.matthias.mario.common
 
 import com.badlogic.gdx.assets.AssetManager
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.maps.MapLayer
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.utils.Array
-import com.matthias.mario.MarioGame.Companion.PPM
+import com.matthias.mario.PPM
 
 val MapLayer.rectangleObjects: Array<RectangleMapObject>
     get() = this.objects.getByType(RectangleMapObject::class.java)

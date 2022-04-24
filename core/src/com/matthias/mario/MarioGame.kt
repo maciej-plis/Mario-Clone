@@ -4,13 +4,11 @@ import com.badlogic.gdx.Game
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.matthias.mario.screens.GameScreen
 
-class MarioGame : Game() {
+const val V_WIDTH  = 416f
+const val V_HEIGHT = 240f
+const val PPM = 100f
 
-    companion object {
-        const val V_WIDTH  = 416f
-        const val V_HEIGHT = 240f
-        const val PPM = 100f
-    }
+class MarioGame : Game() {
 
     lateinit var batch: SpriteBatch
 

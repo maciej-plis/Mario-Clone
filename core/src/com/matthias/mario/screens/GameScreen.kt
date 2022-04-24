@@ -6,7 +6,6 @@ import com.badlogic.gdx.ScreenAdapter
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.Color.BLACK
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.math.Vector2
@@ -15,9 +14,8 @@ import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.ScreenUtils.clear
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.matthias.mario.MarioGame
-import com.matthias.mario.MarioGame.Companion.PPM
-import com.matthias.mario.MarioGame.Companion.V_HEIGHT
-import com.matthias.mario.MarioGame.Companion.V_WIDTH
+import com.matthias.mario.V_HEIGHT
+import com.matthias.mario.V_WIDTH
 import com.matthias.mario.common.centerX
 import com.matthias.mario.common.toMeters
 import com.matthias.mario.listeners.WorldContactListener
@@ -26,29 +24,26 @@ import com.matthias.mario.sprites.Mario
 import com.matthias.mario.utils.B2DWorldCreator.createWorld
 import ktx.box2d.earthGravity
 
-class GameScreen(private val game: MarioGame) : ScreenAdapter() {
+class GameScreen(val game: MarioGame) : ScreenAdapter() {
 
     val assetManager = AssetManager().apply {
-        load("mario.atlas", TextureAtlas::class.java)
+        load("mario.atlas", com.badlogic.gdx.graphics.g2d.TextureAtlas::class.java)
         finishLoading()
     }
 
-    private val camera = OrthographicCamera()
-    private val viewport = FitViewport(V_WIDTH.toMeters(), V_HEIGHT.toMeters(), camera)
-    private val hud = Hud(game.batch)
+    val camera = OrthographicCamera()
+    val viewport = FitViewport(V_WIDTH.toMeters(), V_HEIGHT.toMeters(), camera)
+    val hud = Hud(game.batch)
 
     val map = TmxMapLoader().load("levels/level_1-1.tmx")
-    private val mapRenderer = OrthogonalTiledMapRenderer(map, 1.toMeters())
+    val mapRenderer = OrthogonalTiledMapRenderer(map, 1.toMeters())
+    val b2ddr = Box2DDebugRenderer()
 
-    private val b2ddr = Box2DDebugRenderer()
-    val world = World(earthGravity, true).apply {
-        setContactListener(WorldContactListener())
-    }
-
-    private val mario = Mario(this)
+    val world = World(earthGravity, true).apply { setContactListener(WorldContactListener()) }
+    val mario = Mario(this)
 
     init {
-        camera.position.set(viewport.worldWidth / 2f, viewport.worldHeight / 2f, 0f)
+        camera.position.y = viewport.worldHeight / 2f
         createWorld(this)
     }
 
@@ -87,7 +82,6 @@ class GameScreen(private val game: MarioGame) : ScreenAdapter() {
         world.step(1 / 60f, 6, 2)
 
         mario.update(delta)
-
 
         camera.position.x = mario.centerX
         camera.update()

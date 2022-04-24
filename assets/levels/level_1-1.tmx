@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="211" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="104">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="211" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
  <tileset firstgid="1" source="../tilesets/overworld/water-sky.tsx"/>
  <tileset firstgid="11" source="../tilesets/overworld/pipes-scenery.tsx"/>
  <tileset firstgid="47" source="../tilesets/overworld/ground-stone.tsx"/>
@@ -98,5 +98,6 @@
   <object id="100" x="2976" y="112" width="64" height="16"/>
   <object id="101" x="2992" y="96" width="48" height="16"/>
   <object id="102" x="3008" y="80" width="32" height="16"/>
+  <object id="105" x="3168" y="192" width="16" height="16"/>
  </objectgroup>
 </map>
