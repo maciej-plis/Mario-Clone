@@ -1,13 +1,13 @@
 package com.matthias.mario.sprites
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.maps.objects.RectangleMapObject
+import com.matthias.mario.common.BUMP_SOUND
+import com.matthias.mario.common.COIN_SOUND
+import com.matthias.mario.common.EMPTY_MYSTERY_BLOCK
 import com.matthias.mario.common.MYSTERY_BLOCK_BIT
+import com.matthias.mario.extensions.getSound
 import com.matthias.mario.screens.GameScreen
 
-const val GROUND_STONE_TILESET_NAME = "Overworld-tiles"
-const val EMPTY_MYSTERY_BLOCK = 50
 
 class MysteryBlock(gameScreen: GameScreen, obj: RectangleMapObject) : InteractiveTile(gameScreen, obj) {
 
@@ -17,14 +17,12 @@ class MysteryBlock(gameScreen: GameScreen, obj: RectangleMapObject) : Interactiv
     }
 
     override fun onHeadCollision() {
-        Gdx.app.log("MysteryBlock", "Mystery Block collided with player!")
-
         if (cell?.tile?.id == EMPTY_MYSTERY_BLOCK) {
-            gameScreen.assetManager.get("audio/sfx/bump.wav", Sound::class.java).play()
+            gameScreen.assetManager.getSound(BUMP_SOUND).play()
         } else {
-            gameScreen.assetManager.get("audio/sfx/coin.wav", Sound::class.java).play()
+            gameScreen.assetManager.getSound(COIN_SOUND).play()
         }
 
-        cell?.tile = gameScreen.map.tileSets.getTileSet(GROUND_STONE_TILESET_NAME).getTile(EMPTY_MYSTERY_BLOCK)
+        cell?.tile = gameScreen.map.tileSets.getTile(EMPTY_MYSTERY_BLOCK)
     }
 }

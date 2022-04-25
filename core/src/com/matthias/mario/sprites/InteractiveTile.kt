@@ -5,7 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.Fixture
-import com.matthias.mario.common.*
+import com.matthias.mario.extensions.*
 import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.utils.B2DWorldCreator
 import ktx.box2d.body

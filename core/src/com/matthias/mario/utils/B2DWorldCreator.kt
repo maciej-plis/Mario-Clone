@@ -2,7 +2,7 @@ package com.matthias.mario.utils
 
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.physics.box2d.Body
-import com.matthias.mario.common.*
+import com.matthias.mario.extensions.*
 import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.sprites.Brick
 import com.matthias.mario.sprites.MysteryBlock

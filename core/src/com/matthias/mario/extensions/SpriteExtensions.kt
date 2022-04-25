@@ -1,4 +1,4 @@
-package com.matthias.mario.common
+package com.matthias.mario.extensions
 
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Vector2

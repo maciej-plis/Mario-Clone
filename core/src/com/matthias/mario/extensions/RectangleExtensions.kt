@@ -1,4 +1,4 @@
-package com.matthias.mario.common
+package com.matthias.mario.extensions
 
 import com.badlogic.gdx.math.Rectangle
 

@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Disposable
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.matthias.mario.V_HEIGHT
 import com.matthias.mario.V_WIDTH
-import com.matthias.mario.common.toMeters
+import com.matthias.mario.extensions.toMeters
 
 class Hud(spriteBatch: SpriteBatch) : Disposable {
 

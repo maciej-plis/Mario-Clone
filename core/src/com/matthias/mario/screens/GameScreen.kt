@@ -1,7 +1,5 @@
 package com.matthias.mario.screens
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input.Keys.*
 import com.badlogic.gdx.ScreenAdapter
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.audio.Music
@@ -11,7 +9,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.ScreenUtils.clear
@@ -19,8 +16,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.matthias.mario.MarioGame
 import com.matthias.mario.V_HEIGHT
 import com.matthias.mario.V_WIDTH
-import com.matthias.mario.common.centerX
-import com.matthias.mario.common.toMeters
+import com.matthias.mario.common.*
+import com.matthias.mario.extensions.centerX
+import com.matthias.mario.extensions.getMusic
+import com.matthias.mario.extensions.toMeters
 import com.matthias.mario.listeners.WorldContactListener
 import com.matthias.mario.scenes.Hud
 import com.matthias.mario.sprites.Mario
@@ -30,12 +29,12 @@ import ktx.box2d.earthGravity
 class GameScreen(val game: MarioGame) : ScreenAdapter() {
 
     val assetManager = AssetManager().apply {
-        load("mario.atlas", TextureAtlas::class.java)
-        load("audio/music/overworld-music.mp3", Music::class.java)
-        load("audio/sfx/coin.wav", Sound::class.java)
-        load("audio/sfx/bump.wav", Sound::class.java)
-        load("audio/sfx/jump-small.wav", Sound::class.java)
-        load("audio/sfx/breakblock.wav", Sound::class.java)
+        load(MARIO_ATLAS, TextureAtlas::class.java)
+        load(OVERWORLD_MUSIC, Music::class.java)
+        load(COIN_SOUND, Sound::class.java)
+        load(BUMP_SOUND, Sound::class.java)
+        load(JUMP_SMALL_SOUND, Sound::class.java)
+        load(BRAKE_BLOCK_SOUND, Sound::class.java)
         finishLoading()
     }
 
@@ -43,17 +42,14 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
     val viewport = FitViewport(V_WIDTH.toMeters(), V_HEIGHT.toMeters(), camera)
     val hud = Hud(game.batch)
 
-    val map = TmxMapLoader().load("levels/level_1-1.tmx")
+    val map = TmxMapLoader().load(LEVEL_1_1_MAP)
     val mapRenderer = OrthogonalTiledMapRenderer(map, 1.toMeters())
     val b2ddr = Box2DDebugRenderer()
 
     val world = World(earthGravity, true).apply { setContactListener(WorldContactListener()) }
     val mario = Mario(this)
 
-    val music = assetManager.get("audio/music/overworld-music.mp3", Music::class.java).apply {
-        isLooping = true
-        play()
-    }
+    val music = assetManager.getMusic(OVERWORLD_MUSIC, isLooping = true).play()
 
     init {
         camera.position.y = viewport.worldHeight / 2f
@@ -90,7 +86,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
     }
 
     private fun update(delta: Float) {
-        handleInput(delta)
+        mario.handleInput(delta)
 
         world.step(1 / 60f, 6, 2)
 
@@ -99,20 +95,5 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
         camera.position.x = mario.centerX
         camera.update()
         mapRenderer.setView(camera)
-    }
-
-    private fun handleInput(delta: Float) {
-        if (Gdx.input.isKeyJustPressed(UP)) {
-            mario.body.applyLinearImpulse(Vector2(0f, 4f), mario.body.worldCenter, true)
-            assetManager.get("audio/sfx/jump-small.wav", Sound::class.java).play()
-        }
-
-        if (Gdx.input.isKeyPressed(LEFT) && mario.body.linearVelocity.x >= -2f) {
-            mario.body.applyLinearImpulse(Vector2(-0.1f, 0f), mario.body.worldCenter, true)
-        }
-
-        if (Gdx.input.isKeyPressed(RIGHT) && mario.body.linearVelocity.x <= 2f) {
-            mario.body.applyLinearImpulse(Vector2(0.1f, 0f), mario.body.worldCenter, true)
-        }
     }
 }

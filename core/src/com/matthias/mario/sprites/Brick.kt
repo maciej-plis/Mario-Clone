@@ -1,10 +1,11 @@
 package com.matthias.mario.sprites
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.maps.objects.RectangleMapObject
+import com.matthias.mario.common.BRAKE_BLOCK_SOUND
 import com.matthias.mario.common.BRICK_BIT
 import com.matthias.mario.common.DESTROYED_BIT
+import com.matthias.mario.extensions.getSound
 import com.matthias.mario.screens.GameScreen
 
 class Brick(gameScreen: GameScreen, obj: RectangleMapObject) : InteractiveTile(gameScreen, obj) {
@@ -15,9 +16,9 @@ class Brick(gameScreen: GameScreen, obj: RectangleMapObject) : InteractiveTile(g
     }
 
     override fun onHeadCollision() {
-        Gdx.app.log("Brick", "Brick collided with player!")
+        Gdx.app.log("BRICK", "" + fixture.filterData.categoryBits)
         fixture.filterData.categoryBits = DESTROYED_BIT
-        gameScreen.assetManager.get("audio/sfx/breakblock.wav", Sound::class.java).play()
+        gameScreen.assetManager.getSound(BRAKE_BLOCK_SOUND).play()
         cell?.tile = null
     }
 }
