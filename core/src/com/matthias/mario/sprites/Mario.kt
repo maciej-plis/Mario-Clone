@@ -71,12 +71,14 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
         val body = gameScreen.world.body(type = DynamicBody) { position.set(INITIAL_POSITION.x.toMeters(), INITIAL_POSITION.y.toMeters()) }
         fixtures["body"] = body.circle(radius = 6f.toMeters()) {
             filter.categoryBits = MARIO_BIT
-            filter.maskBits = DEFAULT_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT
+            filter.maskBits = GROUND_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT
         }
 //        fixtures["feet"] = body.edge(Vector2((-2f).toMeters(), (-6f).toMeters()), Vector2(2f.toMeters(), (-6f).toMeters()))
         fixtures["head"] = body.edge(Vector2((-2).toMeters(), 6.toMeters()), Vector2(2f.toMeters(), 6.toMeters())) {
             isSensor = true
             userData = "head"
+            filter.categoryBits = MARIO_BIT
+            filter.maskBits = GROUND_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT
         }
         return body
     }
