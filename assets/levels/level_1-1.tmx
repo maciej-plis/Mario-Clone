@@ -107,16 +107,16 @@
   <object id="106" x="352" y="192" width="16" height="16"/>
   <object id="109" x="640" y="192" width="16" height="16"/>
   <object id="110" x="816" y="192" width="16" height="16"/>
-  <object id="111" x="832" y="192" width="16" height="16"/>
+  <object id="111" x="848" y="192" width="16" height="16"/>
   <object id="112" x="1280" y="64" width="16" height="16"/>
   <object id="114" x="1312" y="64" width="16" height="16"/>
   <object id="117" x="1552" y="192" width="16" height="16"/>
   <object id="118" x="1568" y="192" width="16" height="16"/>
   <object id="119" x="1824" y="192" width="16" height="16"/>
-  <object id="120" x="1840" y="192" width="16" height="16"/>
+  <object id="120" x="1856" y="192" width="16" height="16"/>
   <object id="121" x="2048" y="192" width="16" height="16"/>
-  <object id="123" x="2064" y="192" width="16" height="16"/>
-  <object id="124" x="2000" y="192" width="16" height="16"/>
+  <object id="123" x="2096" y="192" width="16" height="16"/>
+  <object id="124" x="1984" y="192" width="16" height="16"/>
   <object id="126" x="2016" y="192" width="16" height="16"/>
   <object id="127" x="2816" y="192" width="16" height="16"/>
   <object id="128" x="2800" y="192" width="16" height="16"/>

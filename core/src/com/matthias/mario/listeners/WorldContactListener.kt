@@ -4,7 +4,10 @@ import com.badlogic.gdx.physics.box2d.Contact
 import com.badlogic.gdx.physics.box2d.ContactImpulse
 import com.badlogic.gdx.physics.box2d.ContactListener
 import com.badlogic.gdx.physics.box2d.Manifold
+import com.matthias.mario.common.ENEMY_BIT
+import com.matthias.mario.common.OBJECT_BIT
 import com.matthias.mario.sprites.*
+import kotlin.experimental.or
 
 class WorldContactListener : ContactListener {
 
@@ -19,6 +22,20 @@ class WorldContactListener : ContactListener {
             val goombaHead = if (contact.fixtureA.userData == GOOMBA_HEAD) contact.fixtureA else contact.fixtureB
             (goombaHead.body.userData as Goomba).onHeadHit()
         }
+
+        val cDef = contact.fixtureA.filterData.categoryBits or contact.fixtureB.filterData.categoryBits
+
+        when(cDef) {
+            ENEMY_BIT, ENEMY_BIT or OBJECT_BIT -> {
+                if (contact.fixtureA.filterData.categoryBits == ENEMY_BIT) {
+                    (contact.fixtureA.body.userData as Enemy).reverseVelocity()
+                }
+                if (contact.fixtureB.filterData.categoryBits == ENEMY_BIT) {
+                    (contact.fixtureB.body.userData as Enemy).reverseVelocity()
+                }
+            }
+        }
+
     }
 
     override fun endContact(contact: Contact) {

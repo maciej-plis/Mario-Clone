@@ -26,7 +26,7 @@ const val GOOMBA_HEAD = "goomba-head"
 const val GOOMBA_BODY = "goomba-body"
 
 val GOOMBA_COLLISION_CATEGORY = ENEMY_BIT
-val GOOMBA_COLLISION_MASK = GROUND_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT or MARIO_BIT or ENEMY_BIT
+val GOOMBA_COLLISION_MASK = GROUND_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT or MARIO_BIT or ENEMY_BIT or OBJECT_BIT
 
 val headVertices = arrayOf(
     Vector2(-5f, 8f).sclToMeters(),
@@ -47,12 +47,13 @@ class Goomba(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScree
 
     var currentState = WALKING
     var previousState = currentState
-    var velocityX = -0.5f
 
     init {
         val walkTextures = enemiesAtlas.findRegions("goomba-walk-1", "goomba-walk-2")
         walkAnimation = Animation<TextureRegion>(0.3f, walkTextures)
         squashedTexture = enemiesAtlas.findRegion("goomba-squashed")
+
+        velocity.set(-0.5f, 0f)
 
         setRegion(walkTextures.first())
         setSize(walkTextures.first().regionWidth.toMeters(), walkTextures.first().regionHeight.toMeters())
@@ -64,13 +65,14 @@ class Goomba(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScree
 
     override fun draw(batch: Batch?) {
         if(currentState == SQUASHED && stateTimer >= 0.25) {
-            return
+            Gdx.app.postRunnable { gameScreen.enemies.remove(this) }
+            gameScreen.world.destroyBody(body)
         }
         super.draw(batch)
     }
 
     override fun update(delta: Float) {
-        body.linearVelocity= Vector2(velocityX, body.linearVelocity.y)
+        body.linearVelocity= Vector2(velocity.x, body.linearVelocity.y)
         updateState(delta)
         updateTexture()
         setCenter(body.position)
@@ -85,7 +87,7 @@ class Goomba(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScree
         currentState = SQUASHED
         stateTimer = 0f
 
-        velocityX = 0f
+        velocity.set(0f, 0f)
         setSize(squashedTexture.regionWidth.toMeters(), squashedTexture.regionHeight.toMeters())
 
         Gdx.app.postRunnable {
@@ -104,6 +106,7 @@ class Goomba(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScree
         return gameScreen.world.body(type = DynamicBody) {
             position.set(initialPosition.x.toMeters(), initialPosition.y.toMeters())
             userData = this@Goomba
+            active = false
         }
     }
 

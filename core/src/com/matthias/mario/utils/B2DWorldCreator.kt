@@ -2,6 +2,7 @@ package com.matthias.mario.utils
 
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.physics.box2d.Body
+import com.matthias.mario.common.OBJECT_BIT
 import com.matthias.mario.extensions.*
 import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.sprites.Brick
@@ -49,7 +50,14 @@ object B2DWorldCreator {
 
     private fun createPipesLayer(gameScreen: GameScreen) {
         for (obj in gameScreen.map.layers.get(PIPES_LAYER).rectangleObjects) {
-            createTileBody(gameScreen, obj)
+            gameScreen.world.body {
+                position.set(obj.rectangle.centerX.toMeters(), obj.rectangle.centerY.toMeters())
+                polygon {
+                    it.setAsBox(obj.rectangle.halfWidth.toMeters(), obj.rectangle.halfHeight.toMeters())
+                    filter.categoryBits = OBJECT_BIT
+                    userData = obj
+                }
+            }
         }
     }
 

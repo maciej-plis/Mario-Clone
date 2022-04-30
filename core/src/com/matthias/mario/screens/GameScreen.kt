@@ -95,7 +95,12 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
         world.step(1 / 60f, 6, 2)
 
         mario.update(delta)
-        enemies.forEach { it.update(delta) }
+        enemies.forEach {enemy ->
+            if(enemy.x < mario.x + 224.toMeters() ) {
+                enemy.body.isActive = true
+            }
+            enemy.update(delta)
+        }
 
         camera.position.x = mario.centerX
         camera.update()
