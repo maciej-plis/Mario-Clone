@@ -17,6 +17,7 @@ const val EMPTY_MYSTERY_BLOCK = 50
 
 // Texture atlas assets
 const val MARIO_ATLAS = "mario.atlas"
+const val ENEMIES_ATLAS = "enemies.atlas"
 
 // Music assets
 const val OVERWORLD_MUSIC = "audio/music/overworld-music.mp3"

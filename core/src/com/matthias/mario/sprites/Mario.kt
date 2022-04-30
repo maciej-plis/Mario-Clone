@@ -16,26 +16,22 @@ import com.matthias.mario.extensions.XDirection.LEFT
 import com.matthias.mario.extensions.XDirection.RIGHT
 import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.sprites.State.*
-import ktx.box2d.body
-import ktx.box2d.circle
-import ktx.box2d.edge
+import ktx.box2d.*
 import kotlin.experimental.or
 
 enum class State { STANDING, RUNNING, JUMPING, FALLING }
 
-const val HEAD_FIXT = "head"
-const val BODY_FIXT = "body"
-const val FEET_FIXT = "feet"
+const val MARIO_HEAD = "mario-head"
+const val MARIO_BODY = "mario-body"
+const val MARIO_FEET = "mario-feet"
 
-const val COLLISION_CATEGORY = MARIO_BIT
-val COLLISION_MASK = GROUND_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT
-
-val INITIAL_POSITION = Vector2(64f, 64f)
+val MARIO_POSITION = Vector2(64f, 64f)
+val MARIO_COLLISION_CATEGORY = MARIO_BIT
+val MARIO_COLLISION_MASK = GROUND_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT or ENEMY_BIT
 
 class Mario(private val gameScreen: GameScreen) : Sprite() {
 
     private val marioAtlas: TextureAtlas = gameScreen.assetManager.getAtlas(MARIO_ATLAS)
-
     private val standTexture: TextureRegion
 //    private val fallTexture: TextureRegion
     private val runAnimation: Animation<TextureRegion>
@@ -44,12 +40,11 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
     val body = defineBody()
     val fixtures = defineFixtures()
 
-    var currentState: State = STANDING
-    var previousState: State? = null
+    var currentState = STANDING
+    var previousState = currentState
     var stateTimer: Float = 0f
 
     var direction: XDirection = RIGHT
-    var inAir: Boolean = false
 
     init {
         standTexture = marioAtlas.findRegion("mario-stand")
@@ -64,7 +59,7 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
         setRegion(standTexture)
         setSize(standTexture.regionWidth.toMeters(), standTexture.regionHeight.toMeters())
         setOriginCenter()
-        setCenter(body.x.toMeters(), body.y.toMeters())
+        setCenter(body.x, body.y)
     }
 
     fun handleInput(delta: Float) {
@@ -90,29 +85,32 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
     }
 
     private fun defineBody(): Body {
-        return gameScreen.world.body(type = DynamicBody) { position.set(INITIAL_POSITION.x.toMeters(), INITIAL_POSITION.y.toMeters()) }
+        return gameScreen.world.body(type = DynamicBody) {
+            position.set(MARIO_POSITION.x.toMeters(), MARIO_POSITION.y.toMeters())
+            userData = this@Mario
+        }
     }
 
-    private fun defineFixtures(): MutableMap<String, Fixture> {
-        val fixtures: MutableMap<String, Fixture> = mutableMapOf()
-        fixtures[BODY_FIXT] = body.circle(radius = 6f.toMeters()) {
-            filter.categoryBits = COLLISION_CATEGORY
-            filter.maskBits = COLLISION_MASK
-            userData = BODY_FIXT
+        private fun defineFixtures(): MutableMap<String, Fixture> {
+            val fixtures: MutableMap<String, Fixture> = mutableMapOf()
+            fixtures[MARIO_BODY] = body.box(10f.toMeters(), 11f.toMeters()) {
+                filter.categoryBits = MARIO_COLLISION_CATEGORY
+                filter.maskBits = MARIO_COLLISION_MASK
+                userData = MARIO_BODY
+            }
+            fixtures[MARIO_FEET] = body.edge(Vector2((-2f).toMeters(), (-6f).toMeters()), Vector2(2f.toMeters(), (-6f).toMeters())) {
+                filter.categoryBits = MARIO_COLLISION_CATEGORY
+                filter.maskBits = MARIO_COLLISION_MASK
+                userData = MARIO_FEET
+            }
+            fixtures[MARIO_HEAD] = body.edge(Vector2((-2).toMeters(), 6.toMeters()), Vector2(2f.toMeters(), 6.toMeters())) {
+                filter.categoryBits = MARIO_COLLISION_CATEGORY
+                filter.maskBits = MARIO_COLLISION_MASK
+                userData = MARIO_HEAD
+                isSensor = true
+            }
+            return fixtures
         }
-        fixtures[FEET_FIXT] = body.edge(Vector2((-2f).toMeters(), (-6f).toMeters()), Vector2(2f.toMeters(), (-6f).toMeters())) {
-            filter.categoryBits = COLLISION_CATEGORY
-            filter.maskBits = COLLISION_MASK
-            userData = FEET_FIXT
-        }
-        fixtures[HEAD_FIXT] = body.edge(Vector2((-2).toMeters(), 6.toMeters()), Vector2(2f.toMeters(), 6.toMeters())) {
-            filter.categoryBits = COLLISION_CATEGORY
-            filter.maskBits = COLLISION_MASK
-            userData = HEAD_FIXT
-            isSensor = true
-        }
-        return fixtures
-    }
 
     private fun updateDirection() {
         direction = when {
@@ -133,7 +131,8 @@ class Mario(private val gameScreen: GameScreen) : Sprite() {
     }
 
     private fun updateTexture() {
-        setRegion(frame.apply { flipToDirection(direction) })
+        frame.flipToDirection(direction)
+        setRegion(frame)
     }
 
     private val frame: TextureRegion

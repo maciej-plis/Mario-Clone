@@ -4,17 +4,20 @@ import com.badlogic.gdx.physics.box2d.Contact
 import com.badlogic.gdx.physics.box2d.ContactImpulse
 import com.badlogic.gdx.physics.box2d.ContactListener
 import com.badlogic.gdx.physics.box2d.Manifold
-import com.matthias.mario.sprites.InteractiveTile
+import com.matthias.mario.sprites.*
 
 class WorldContactListener : ContactListener {
 
     override fun beginContact(contact: Contact) {
-        if(contact.fixtureA.userData == "head" || contact.fixtureB.userData == "head") {
-            val head = if (contact.fixtureA.userData == "head") contact.fixtureA else contact.fixtureB
-            val other = if (head == contact.fixtureA) contact.fixtureB else contact.fixtureA
+        if(contact.fixtureA.userData == MARIO_HEAD || contact.fixtureB.userData == MARIO_HEAD) {
+            val marioHead = if (contact.fixtureA.userData == MARIO_HEAD) contact.fixtureA else contact.fixtureB
+            val other = if (marioHead == contact.fixtureA) contact.fixtureB else contact.fixtureA
             if(other.userData != null && other.userData is InteractiveTile) {
                 (other.userData as InteractiveTile).onHeadCollision()
             }
+        } else if((contact.fixtureA.userData == GOOMBA_HEAD || contact.fixtureB.userData == GOOMBA_HEAD) && (contact.fixtureA.userData == MARIO_FEET || contact.fixtureB.userData == MARIO_FEET)) {
+            val goombaHead = if (contact.fixtureA.userData == GOOMBA_HEAD) contact.fixtureA else contact.fixtureB
+            (goombaHead.body.userData as Goomba).onHeadHit()
         }
     }
 

@@ -1,6 +1,7 @@
 package com.matthias.mario.extensions
 
 import com.badlogic.gdx.math.Rectangle
+import com.badlogic.gdx.math.Vector2
 
 val Rectangle.halfWidth: Float
     get() = this.width / 2f
@@ -13,3 +14,6 @@ val Rectangle.centerX: Float
 
 val Rectangle.centerY: Float
     get() = this.y + this.halfHeight
+
+val Rectangle.center: Vector2
+    get() = Vector2(centerX, centerY)

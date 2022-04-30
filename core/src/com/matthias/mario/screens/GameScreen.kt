@@ -22,6 +22,7 @@ import com.matthias.mario.extensions.getMusic
 import com.matthias.mario.extensions.toMeters
 import com.matthias.mario.listeners.WorldContactListener
 import com.matthias.mario.scenes.Hud
+import com.matthias.mario.sprites.Enemy
 import com.matthias.mario.sprites.Mario
 import com.matthias.mario.utils.B2DWorldCreator.createWorld
 import ktx.box2d.earthGravity
@@ -30,6 +31,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
 
     val assetManager = AssetManager().apply {
         load(MARIO_ATLAS, TextureAtlas::class.java)
+        load(ENEMIES_ATLAS, TextureAtlas::class.java)
         load(OVERWORLD_MUSIC, Music::class.java)
         load(COIN_SOUND, Sound::class.java)
         load(BUMP_SOUND, Sound::class.java)
@@ -48,6 +50,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
 
     val world = World(earthGravity, true).apply { setContactListener(WorldContactListener()) }
     val mario = Mario(this)
+    val enemies: MutableList<Enemy> = mutableListOf()
 
     val music = assetManager.getMusic(OVERWORLD_MUSIC, isLooping = true).play()
 
@@ -67,6 +70,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
         game.batch.projectionMatrix = camera.combined
         game.batch.begin()
         mario.draw(game.batch)
+        enemies.forEach { it.draw(game.batch) }
         game.batch.end()
 
         hud.stage.draw()
@@ -91,6 +95,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
         world.step(1 / 60f, 6, 2)
 
         mario.update(delta)
+        enemies.forEach { it.update(delta) }
 
         camera.position.x = mario.centerX
         camera.update()

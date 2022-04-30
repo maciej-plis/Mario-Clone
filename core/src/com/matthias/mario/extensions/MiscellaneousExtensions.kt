@@ -7,10 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.maps.MapLayer
 import com.badlogic.gdx.maps.objects.RectangleMapObject
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
 import com.matthias.mario.PPM
-import com.matthias.mario.extensions.XDirection.LEFT
-import com.matthias.mario.extensions.XDirection.RIGHT
 
 val MapLayer.rectangleObjects: Array<RectangleMapObject>
     get() = this.objects.getByType(RectangleMapObject::class.java)
@@ -59,18 +58,6 @@ fun Int.toPixels(): Float {
     return this * PPM
 }
 
-fun TextureRegion.flipX() {
-    flip(true, false)
-}
-
-fun TextureRegion.flipY() {
-    flip(false, true)
-}
-
-fun TextureRegion.flipToDirection(xDirection: XDirection) {
-    val isFacingLeftButNotFlipped = xDirection == LEFT && !isFlipX
-    val isFacingRightButFlipped = xDirection == RIGHT && isFlipX
-    if (isFacingLeftButNotFlipped || isFacingRightButFlipped) {
-        flipX()
-    }
+fun Vector2.sclToMeters(): Vector2 {
+    return scl(1f.toMeters())
 }
