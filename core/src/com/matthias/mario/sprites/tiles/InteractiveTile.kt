@@ -1,4 +1,4 @@
-package com.matthias.mario.sprites
+package com.matthias.mario.sprites.tiles
 
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer
@@ -10,6 +10,16 @@ import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.utils.B2DWorldCreator
 import ktx.box2d.body
 import ktx.box2d.polygon
+
+enum class TileContent {
+    EMPTY, COIN, MUSHROOM, FLOWER, STAR;
+
+    companion object {
+        fun valueOfOrDefault(value: String, default: TileContent): TileContent {
+            return values().firstOrNull() { it.name == value.uppercase() } ?: default
+        }
+    }
+}
 
 abstract class InteractiveTile(protected val gameScreen: GameScreen, obj: RectangleMapObject) {
 

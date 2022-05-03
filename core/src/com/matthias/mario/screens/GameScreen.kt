@@ -22,7 +22,8 @@ import com.matthias.mario.extensions.getMusic
 import com.matthias.mario.extensions.toMeters
 import com.matthias.mario.listeners.WorldContactListener
 import com.matthias.mario.scenes.Hud
-import com.matthias.mario.sprites.Enemy
+import com.matthias.mario.sprites.enemies.Enemy
+import com.matthias.mario.sprites.items.Item
 import com.matthias.mario.sprites.Mario
 import com.matthias.mario.utils.B2DWorldCreator.createWorld
 import ktx.box2d.earthGravity
@@ -32,11 +33,13 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
     val assetManager = AssetManager().apply {
         load(MARIO_ATLAS, TextureAtlas::class.java)
         load(ENEMIES_ATLAS, TextureAtlas::class.java)
+        load(ITEMS_ATLAS, TextureAtlas::class.java)
         load(OVERWORLD_MUSIC, Music::class.java)
         load(COIN_SOUND, Sound::class.java)
         load(BUMP_SOUND, Sound::class.java)
         load(JUMP_SMALL_SOUND, Sound::class.java)
         load(BRAKE_BLOCK_SOUND, Sound::class.java)
+        load(POWER_UP_APPEARS_SOUND, Sound::class.java)
         finishLoading()
     }
 
@@ -49,10 +52,12 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
     val b2ddr = Box2DDebugRenderer()
 
     val world = World(earthGravity, true).apply { setContactListener(WorldContactListener()) }
+
     val mario = Mario(this)
     val enemies: MutableList<Enemy> = mutableListOf()
+    val items: MutableList<Item> = mutableListOf()
 
-    val music = assetManager.getMusic(OVERWORLD_MUSIC, isLooping = true).play()
+//    val music = assetManager.getMusic(OVERWORLD_MUSIC, isLooping = true).play()
 
     init {
         camera.position.y = viewport.worldHeight / 2f
@@ -71,6 +76,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
         game.batch.begin()
         mario.draw(game.batch)
         enemies.forEach { it.draw(game.batch) }
+        items.forEach { it.draw(game.batch) }
         game.batch.end()
 
         hud.stage.draw()
@@ -101,6 +107,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
             }
             enemy.update(delta)
         }
+        items.forEach { it.update() }
 
         camera.position.x = mario.centerX
         camera.update()

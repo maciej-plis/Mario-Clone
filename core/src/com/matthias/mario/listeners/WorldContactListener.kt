@@ -7,6 +7,10 @@ import com.badlogic.gdx.physics.box2d.Manifold
 import com.matthias.mario.common.ENEMY_BIT
 import com.matthias.mario.common.OBJECT_BIT
 import com.matthias.mario.sprites.*
+import com.matthias.mario.sprites.enemies.Enemy
+import com.matthias.mario.sprites.enemies.GOOMBA_HEAD
+import com.matthias.mario.sprites.enemies.Goomba
+import com.matthias.mario.sprites.tiles.InteractiveTile
 import kotlin.experimental.or
 
 class WorldContactListener : ContactListener {
@@ -28,10 +32,10 @@ class WorldContactListener : ContactListener {
         when(cDef) {
             ENEMY_BIT, ENEMY_BIT or OBJECT_BIT -> {
                 if (contact.fixtureA.filterData.categoryBits == ENEMY_BIT) {
-                    (contact.fixtureA.body.userData as Enemy).reverseVelocity()
+                    (contact.fixtureA.body.userData as Enemy).turnAround()
                 }
                 if (contact.fixtureB.filterData.categoryBits == ENEMY_BIT) {
-                    (contact.fixtureB.body.userData as Enemy).reverseVelocity()
+                    (contact.fixtureB.body.userData as Enemy).turnAround()
                 }
             }
         }

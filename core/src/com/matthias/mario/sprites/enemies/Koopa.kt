@@ -1,4 +1,4 @@
-package com.matthias.mario.sprites
+package com.matthias.mario.sprites.enemies
 
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.TextureRegion
@@ -12,9 +12,9 @@ import com.matthias.mario.extensions.flipToDirection
 import com.matthias.mario.extensions.setCenter
 import com.matthias.mario.extensions.toMeters
 import com.matthias.mario.screens.GameScreen
+import com.matthias.mario.sprites.enemies.Enemy
 import ktx.box2d.body
 import ktx.box2d.box
-import ktx.box2d.polygon
 import kotlin.experimental.or
 
 const val KOOPA_BODY = "koopa-body"

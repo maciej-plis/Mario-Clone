@@ -1,4 +1,4 @@
-package com.matthias.mario.sprites
+package com.matthias.mario.sprites.tiles
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.maps.objects.RectangleMapObject

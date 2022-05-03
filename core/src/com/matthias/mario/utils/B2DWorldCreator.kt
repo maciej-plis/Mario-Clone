@@ -1,15 +1,18 @@
 package com.matthias.mario.utils
 
+import com.badlogic.gdx.maps.objects.PolygonMapObject
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.physics.box2d.Body
 import com.matthias.mario.common.OBJECT_BIT
 import com.matthias.mario.extensions.*
 import com.matthias.mario.screens.GameScreen
-import com.matthias.mario.sprites.Brick
-import com.matthias.mario.sprites.Goomba
-import com.matthias.mario.sprites.Koopa
-import com.matthias.mario.sprites.MysteryBlock
+import com.matthias.mario.sprites.tiles.Brick
+import com.matthias.mario.sprites.enemies.Goomba
+import com.matthias.mario.sprites.enemies.Koopa
+import com.matthias.mario.sprites.tiles.MysteryBlock
 import ktx.box2d.body
+import ktx.box2d.box
+import ktx.box2d.chain
 import ktx.box2d.polygon
 
 object B2DWorldCreator {
@@ -32,19 +35,12 @@ object B2DWorldCreator {
         createKoopas(gameScreen)
     }
 
-    fun createTileBody(gameScreen: GameScreen, obj: RectangleMapObject, tile: Any? = null): Body {
-        return gameScreen.world.body {
-            position.set(obj.rectangle.centerX.toMeters(), obj.rectangle.centerY.toMeters())
-            polygon {
-                it.setAsBox(obj.rectangle.halfWidth.toMeters(), obj.rectangle.halfHeight.toMeters())
-                userData = tile
-            }
-        }
-    }
-
     private fun createGroundLayer(gameScreen: GameScreen) {
         for (obj in gameScreen.map.layers.get(GROUND_LAYER).rectangleObjects) {
             createTileBody(gameScreen, obj)
+        }
+        for(obj in gameScreen.map.layers.get(GROUND_LAYER).polygonObjects) {
+            createPolygonBody(gameScreen, obj)
         }
     }
 
@@ -82,6 +78,22 @@ object B2DWorldCreator {
     private fun createKoopas(gameScreen: GameScreen) {
         for (obj in gameScreen.map.layers.get(KOOPAS_LAYER).rectangleObjects) {
             Koopa(gameScreen, obj.rectangle.center)
+        }
+    }
+
+    private fun createTileBody(gameScreen: GameScreen, obj: RectangleMapObject, tile: Any? = null): Body {
+        return gameScreen.world.body {
+            position.set(obj.rectangle.centerX.toMeters(), obj.rectangle.centerY.toMeters())
+            box(width = obj.rectangle.width.toMeters(), height = obj.rectangle.height.toMeters()) {
+                userData = tile
+            }
+        }
+    }
+
+    private fun createPolygonBody(gameScreen: GameScreen, obj: PolygonMapObject): Body {
+        return gameScreen.world.body {
+            position.set(obj.polygon.x.toMeters(), obj.polygon.y.toMeters())
+            chain(vertices = obj.polygon.vertices.map { it.toMeters() }.toFloatArray())
         }
     }
 }

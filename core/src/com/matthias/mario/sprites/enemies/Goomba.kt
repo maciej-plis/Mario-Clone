@@ -1,4 +1,4 @@
-package com.matthias.mario.sprites
+package com.matthias.mario.sprites.enemies
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Animation
@@ -14,8 +14,8 @@ import com.matthias.mario.extensions.sclToMeters
 import com.matthias.mario.extensions.setCenter
 import com.matthias.mario.extensions.toMeters
 import com.matthias.mario.screens.GameScreen
-import com.matthias.mario.sprites.Goomba.State.SQUASHED
-import com.matthias.mario.sprites.Goomba.State.WALKING
+import com.matthias.mario.sprites.enemies.Goomba.State.SQUASHED
+import com.matthias.mario.sprites.enemies.Goomba.State.WALKING
 import ktx.box2d.body
 import ktx.box2d.box
 import ktx.box2d.polygon
@@ -76,7 +76,6 @@ class Goomba(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScree
         updateState(delta)
         updateTexture()
         setCenter(body.position)
-        setOriginCenter()
     }
 
     override fun onHeadHit() {

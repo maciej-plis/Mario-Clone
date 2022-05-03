@@ -6,13 +6,19 @@ import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.maps.MapLayer
+import com.badlogic.gdx.maps.MapProperties
+import com.badlogic.gdx.maps.objects.PolygonMapObject
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
 import com.matthias.mario.PPM
+import com.matthias.mario.sprites.tiles.TileContent
 
 val MapLayer.rectangleObjects: Array<RectangleMapObject>
     get() = this.objects.getByType(RectangleMapObject::class.java)
+
+val MapLayer.polygonObjects: Array<PolygonMapObject>
+    get() = this.objects.getByType(PolygonMapObject::class.java)
 
 fun AssetManager.getAtlas(fileName: String): TextureAtlas {
     return this.get(fileName, TextureAtlas::class.java)
@@ -60,4 +66,12 @@ fun Int.toPixels(): Float {
 
 fun Vector2.sclToMeters(): Vector2 {
     return scl(1f.toMeters())
+}
+
+fun MapProperties.getContent(key: String, default: TileContent): TileContent {
+    val value = get(key)
+    if(value is String) {
+        return TileContent.valueOfOrDefault(value, default)
+    }
+    return default
 }
