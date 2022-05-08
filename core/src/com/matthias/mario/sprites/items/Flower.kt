@@ -41,7 +41,7 @@ class Flower(gameScreen: GameScreen, initialPosition: Vector2) : Item(gameScreen
 
     override fun use() {
         Gdx.app.postRunnable { gameScreen.items.remove(this) }
-        gameScreen.world.destroyBody(body)
+        Gdx.app.postRunnable { gameScreen.world.destroyBody(body) }
     }
 
     private fun defineBody(initialPosition: Vector2): Body {

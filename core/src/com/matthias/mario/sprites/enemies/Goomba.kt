@@ -49,7 +49,7 @@ class Goomba(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScree
     var previousState = currentState
 
     init {
-        val walkTextures = enemiesAtlas.findRegions("goomba-walk-1", "goomba-walk-2")
+        val walkTextures = enemiesAtlas.findRegions(arrayOf("goomba-walk-1", "goomba-walk-2"))
         walkAnimation = Animation<TextureRegion>(0.3f, walkTextures)
         squashedTexture = enemiesAtlas.findRegion("goomba-squashed")
 

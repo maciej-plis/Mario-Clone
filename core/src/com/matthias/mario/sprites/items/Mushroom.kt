@@ -27,6 +27,7 @@ class Mushroom(gameScreen: GameScreen, initialPosition: Vector2) : Item(gameScre
     override var fixtures = defineFixtures()
 
     init {
+        velocity.set(0.5f, 0f)
         mushroomTexture = itemsAtlas.findRegion("mushroom")
 
         setRegion(mushroomTexture)
@@ -42,7 +43,7 @@ class Mushroom(gameScreen: GameScreen, initialPosition: Vector2) : Item(gameScre
 
     override fun use() {
         Gdx.app.postRunnable { gameScreen.items.remove(this) }
-        gameScreen.world.destroyBody(body)
+        Gdx.app.postRunnable { gameScreen.world.destroyBody(body) }
     }
 
     private fun defineBody(initialPosition: Vector2): Body {

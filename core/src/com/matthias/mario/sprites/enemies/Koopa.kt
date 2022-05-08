@@ -8,11 +8,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
 import com.badlogic.gdx.physics.box2d.Fixture
 import com.matthias.mario.common.*
 import com.matthias.mario.extensions.findRegions
-import com.matthias.mario.extensions.flipToDirection
+import com.matthias.mario.extensions.inDirection
 import com.matthias.mario.extensions.setCenter
 import com.matthias.mario.extensions.toMeters
 import com.matthias.mario.screens.GameScreen
-import com.matthias.mario.sprites.enemies.Enemy
 import ktx.box2d.body
 import ktx.box2d.box
 import kotlin.experimental.or
@@ -30,7 +29,7 @@ class Koopa(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScreen
     override var fixtures = defineFixtures()
 
     init {
-        val walkTextures = enemiesAtlas.findRegions("koopa-walk-1", "koopa-walk-2")
+        val walkTextures = enemiesAtlas.findRegions(arrayOf("koopa-walk-1", "koopa-walk-2"))
         walkAnimation = Animation<TextureRegion>(0.3f, walkTextures)
 
         setRegion(walkTextures.first())
@@ -73,8 +72,7 @@ class Koopa(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScreen
     }
 
     private fun updateTexture() {
-        frame.flipToDirection(direction)
-        setRegion(frame)
+        setRegion(frame.inDirection(direction))
     }
 
     private val frame: TextureRegion

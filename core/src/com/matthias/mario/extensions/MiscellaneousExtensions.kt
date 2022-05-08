@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
 import com.matthias.mario.PPM
 import com.matthias.mario.sprites.tiles.TileContent
+import kotlin.Array as KotlinArray
 
 val MapLayer.rectangleObjects: Array<RectangleMapObject>
     get() = this.objects.getByType(RectangleMapObject::class.java)
@@ -42,7 +43,7 @@ inline fun <reified T> Sequence<T>.toArray(): Array<T> {
     return array
 }
 
-fun TextureAtlas.findRegions(vararg names: String): Array<TextureRegion> {
+fun TextureAtlas.findRegions(names: KotlinArray<out String>): Array<TextureRegion> {
     return names.asSequence()
         .map { findRegion(it) }
         .toArray()
