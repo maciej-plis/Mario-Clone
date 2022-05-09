@@ -1,12 +1,10 @@
 package com.matthias.mario.sprites.mario
 
 import com.badlogic.gdx.graphics.g2d.Animation
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode.LOOP
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
-import com.matthias.mario.common.EntityState
-import com.matthias.mario.common.EntityTextures
-import com.matthias.mario.common.JUMP_SMALL_SOUND
-import com.matthias.mario.common.MARIO_ATLAS
+import com.matthias.mario.common.*
 import com.matthias.mario.extensions.getAtlas
 import com.matthias.mario.extensions.getSound
 import com.matthias.mario.screens.GameScreen
@@ -25,12 +23,12 @@ class MarioSmallState(private val gameScreen: GameScreen, private val mario: Mar
 
     private val state = EntityState(STANDING)
     private val textures = EntityTextures<State>(gameScreen.assetManager.getAtlas(MARIO_ATLAS)).apply {
-        addTexture(STANDING, "mario-stand")
-//        addTexture(STANDING, "mario-fall")
-        addAnimation(RUNNING, 0.1f, "mario-run-1", "mario-run-2", "mario-run-3", mode = Animation.PlayMode.LOOP)
-        addAnimation(JUMPING, 0.1f, "mario-jump-1", "mario-jump-2")
-//        addAnimation(GROWING, 0.1f, "mario-grow-1", "mario-grow-2", "mario-grow-3")
-//        addAnimation(SHRINKING, 0.1f, "mario-shrink-1", "mario-shrink-2", "mario-shrink-3")
+        addTexture(STANDING, "small-mario-stand")
+        addTexture(FALLING, "small-mario-fall")
+        addTexture(JUMPING, "small-mario-jump")
+        addAnimation(RUNNING, 0.1f, *enumerateString("small-mario-run-", 1, 3), mode = LOOP)
+        addAnimation(GROWING, 0.1f, *enumerateString("mario-grow-", 1, 10))
+        addAnimation(SHRINKING, 0.1f, *enumerateString("mario-shrink-", 1, 2))
     }
 
     override val stateId = SMALL_MARIO

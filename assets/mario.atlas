@@ -1,257 +1,215 @@
 
 mario.png
-size: 128, 128
+size: 256, 64
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-grow-shrink-1
+big-mario-jump
   rotate: false
-  xy: 73, 43
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-grow-shrink-7
-  rotate: false
-  xy: 73, 43
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-mario-stand
-  rotate: false
-  xy: 73, 43
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-grow-shrink-2
-  rotate: false
-  xy: 19, 1
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: -1
-grow-shrink-3
-  rotate: false
-  xy: 1, 27
+  xy: 109, 27
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
-mario-15
-  rotate: false
-  xy: 1, 27
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-grow-shrink-5
-  rotate: false
-  xy: 55, 95
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-mario-24
-  rotate: false
-  xy: 55, 95
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-grow-shrink-6
-  rotate: false
-  xy: 55, 9
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-mario-10
-  rotate: false
-  xy: 55, 9
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-mario-11
-  rotate: false
-  xy: 109, 57
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-mario-12
-  rotate: false
-  xy: 91, 75
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-mario-13
-  rotate: false
-  xy: 91, 111
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-mario-14
-  rotate: false
-  xy: 109, 75
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-mario-16
-  rotate: false
-  xy: 55, 27
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-mario-17
-  rotate: false
-  xy: 37, 61
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-mario-18
-  rotate: false
-  xy: 1, 61
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-mario-19
-  rotate: false
-  xy: 73, 95
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-mario-20
-  rotate: false
-  xy: 37, 95
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-grow-shrink-4
-  rotate: false
-  xy: 37, 95
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-mario-21
-  rotate: false
-  xy: 1, 1
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: -1
-mario-22
+big-mario-pole-slide-1
   rotate: false
   xy: 37, 27
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
-mario-23
+big-mario-pole-slide-2
   rotate: false
-  xy: 19, 95
+  xy: 145, 27
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
-mario-25
+big-mario-slide
+  rotate: false
+  xy: 1, 27
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+big-mario-squat
+  rotate: false
+  xy: 163, 35
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1
+big-mario-walk-1
   rotate: false
   xy: 19, 27
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
-mario-26
+big-mario-walk-2
   rotate: false
-  xy: 1, 95
+  xy: 127, 27
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
-mario-27
+big-mario-walk-3
   rotate: false
-  xy: 55, 61
+  xy: 73, 27
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
-mario-28
+mario-grow-2
   rotate: false
-  xy: 19, 61
+  xy: 1, 1
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1
+mario-grow-4
+  rotate: false
+  xy: 1, 1
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1
+mario-grow-6
+  rotate: false
+  xy: 1, 1
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1
+mario-grow-9
+  rotate: false
+  xy: 1, 1
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1
+mario-grow-7
+  rotate: false
+  xy: 55, 27
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
-mario-29
+big-mario-stand
   rotate: false
-  xy: 73, 61
+  xy: 55, 27
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
-mario-7
+mario-grow-10
   rotate: false
-  xy: 109, 93
+  xy: 55, 27
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-grow-8
+  rotate: false
+  xy: 19, 9
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-mario-8
+mario-grow-1
   rotate: false
-  xy: 91, 93
+  xy: 19, 9
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-mario-9
+mario-grow-3
   rotate: false
-  xy: 109, 39
+  xy: 19, 9
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-mario-jump-1
+mario-grow-5
   rotate: false
-  xy: 91, 39
+  xy: 19, 9
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-mario-jump-2
+small-mario-stand
   rotate: false
-  xy: 73, 25
+  xy: 19, 9
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-mario-run-1
+mario-shrink-1
+  rotate: false
+  xy: 91, 27
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+mario-shrink-2
+  rotate: false
+  xy: 199, 43
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+small-mario-fall
+  rotate: false
+  xy: 181, 43
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+small-mario-jump
+  rotate: false
+  xy: 91, 9
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+small-mario-pole-slide-1
+  rotate: false
+  xy: 73, 9
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+small-mario-pole-slide-2
   rotate: false
   xy: 37, 9
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-mario-run-2
+small-mario-run-1
   rotate: false
-  xy: 91, 57
+  xy: 217, 43
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-mario-run-3
+small-mario-run-2
   rotate: false
-  xy: 109, 111
+  xy: 109, 9
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+small-mario-run-3
+  rotate: false
+  xy: 235, 43
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+small-mario-slide
+  rotate: false
+  xy: 55, 9
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
