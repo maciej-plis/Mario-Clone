@@ -10,13 +10,14 @@ import com.matthias.mario.extensions.XDirection
 import com.matthias.mario.extensions.XDirection.RIGHT
 import com.matthias.mario.extensions.getAtlas
 import com.matthias.mario.screens.GameScreen
+import com.matthias.mario.sprites.mario.Mario
 
 abstract class Item(protected val gameScreen: GameScreen) : Sprite() {
 
     protected val itemsAtlas: TextureAtlas = gameScreen.assetManager.getAtlas(ITEMS_ATLAS)
 
-    abstract var body: Body
-    abstract var fixtures: FixturesMap
+    abstract val body: Body
+    abstract val fixtures: FixturesMap<*>
 
     val velocity = Vector2(0f, 0f)
 
@@ -25,7 +26,7 @@ abstract class Item(protected val gameScreen: GameScreen) : Sprite() {
 
     abstract fun update()
 
-    abstract fun use()
+    abstract fun use(mario: Mario)
 
     fun turnAround() {
         direction = if (direction == XDirection.LEFT) RIGHT else XDirection.LEFT

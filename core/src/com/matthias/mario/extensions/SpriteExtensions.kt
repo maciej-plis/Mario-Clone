@@ -48,3 +48,11 @@ val Sprite.centerY: Float
 fun Sprite.setCenter(center: Vector2) {
     setCenter(center.x, center.y)
 }
+
+fun Sprite.setOriginBasedPosition(position: Vector2) {
+    setOriginBasedPosition(position.x, position.y)
+}
+
+fun Sprite.setOrigin(origin: Vector2) {
+    setOrigin(origin.x, origin.y)
+}

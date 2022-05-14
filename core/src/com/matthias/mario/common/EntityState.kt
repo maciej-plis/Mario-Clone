@@ -10,6 +10,10 @@ class EntityState<T>(initialState: T) {
         if (newState == currentState) updateStateTimer(delta) else changeState(newState)
     }
 
+    fun update(delta: Float) {
+        updateStateTimer(delta)
+    }
+
     private fun updateStateTimer(delta: Float) {
         stateTimer += delta
     }

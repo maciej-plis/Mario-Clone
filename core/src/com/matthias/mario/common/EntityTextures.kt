@@ -21,6 +21,18 @@ class EntityTextures<T>(private val atlas: TextureAtlas) {
         this.textures[state] = Animation(frameDuration, atlas.findRegions(textureNames), mode)
     }
 
+    fun isAnimationFinished(state: EntityState<T>): Boolean {
+        val texture = textures.getOrElse(state.currentState) {
+            throw RuntimeException("Texture for state '$state' is not initialized")
+        }
+
+        if (texture is TextureRegion) {
+            return true
+        }
+
+        return (texture as Animation<TextureRegion>).isAnimationFinished(state.stateTimer)
+    }
+
     fun getCurrentTexture(state: EntityState<T>, looping: Boolean = false): TextureRegion {
         val texture = textures.getOrElse(state.currentState) {
             throw RuntimeException("Texture for state '$state' is not initialized")

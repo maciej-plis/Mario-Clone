@@ -28,7 +28,10 @@ const val OVERWORLD_MUSIC = "audio/music/overworld-music.mp3"
 const val COIN_SOUND = "audio/sfx/coin.wav"
 const val BUMP_SOUND = "audio/sfx/bump.wav"
 const val JUMP_SMALL_SOUND = "audio/sfx/jump-small.wav"
+const val JUMP_BIG_SOUND = "audio/sfx/jump-super.wav"
 const val BRAKE_BLOCK_SOUND = "audio/sfx/breakblock.wav"
 const val POWER_UP_APPEARS_SOUND = "audio/sfx/powerup_appears.wav"
+const val MARIO_GROW_SOUND = "audio/sfx/powerup.wav"
+const val PIPE_SOUND = "audio/sfx/pipe.wav"
 
 

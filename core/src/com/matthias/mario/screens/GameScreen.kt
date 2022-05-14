@@ -18,13 +18,12 @@ import com.matthias.mario.V_HEIGHT
 import com.matthias.mario.V_WIDTH
 import com.matthias.mario.common.*
 import com.matthias.mario.extensions.centerX
-import com.matthias.mario.extensions.getMusic
 import com.matthias.mario.extensions.toMeters
 import com.matthias.mario.listeners.WorldContactListener
 import com.matthias.mario.scenes.Hud
 import com.matthias.mario.sprites.enemies.Enemy
 import com.matthias.mario.sprites.items.Item
-import com.matthias.mario.sprites.Mario
+import com.matthias.mario.sprites.mario.Mario
 import com.matthias.mario.utils.B2DWorldCreator.createWorld
 import ktx.box2d.earthGravity
 
@@ -38,8 +37,11 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
         load(COIN_SOUND, Sound::class.java)
         load(BUMP_SOUND, Sound::class.java)
         load(JUMP_SMALL_SOUND, Sound::class.java)
+        load(JUMP_BIG_SOUND, Sound::class.java)
         load(BRAKE_BLOCK_SOUND, Sound::class.java)
         load(POWER_UP_APPEARS_SOUND, Sound::class.java)
+        load(MARIO_GROW_SOUND, Sound::class.java)
+        load(PIPE_SOUND, Sound::class.java)
         finishLoading()
     }
 
@@ -96,11 +98,12 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
     }
 
     private fun update(delta: Float) {
-        mario.handleInput(delta)
+        mario.handleInput()
 
         world.step(1 / 60f, 6, 2)
 
         mario.update(delta)
+
         enemies.forEach {enemy ->
             if(enemy.x < mario.x + 224.toMeters() ) {
                 enemy.body.isActive = true

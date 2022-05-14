@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef
 import com.matthias.mario.common.*
 import com.matthias.mario.extensions.toMeters
 import com.matthias.mario.screens.GameScreen
+import com.matthias.mario.sprites.items.Star.Companion.StarFixtures.BODY
+import com.matthias.mario.sprites.mario.Mario
 import ktx.box2d.body
 import ktx.box2d.box
 import kotlin.experimental.or
@@ -15,15 +17,15 @@ import kotlin.experimental.or
 class Star(gameScreen: GameScreen, initialPosition: Vector2) : Item(gameScreen) {
 
     companion object {
-        const val STAR: String = "star"
-        val STAR_COLLISION_CATEGORY: Short = ITEM_BIT
+        enum class StarFixtures { BODY }
+
         val STAR_COLLISION_MASK: Short = GROUND_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT or MARIO_BIT or ENEMY_BIT or OBJECT_BIT or MARIO_BIT
     }
 
     private val starTexture: TextureRegion
 
-    override var body = defineBody(initialPosition)
-    override var fixtures = defineFixtures()
+    override var body: Body = defineBody(initialPosition)
+    override var fixtures: FixturesMap<StarFixtures> = defineFixtures()
 
     init {
         starTexture = itemsAtlas.findRegion("star")
@@ -39,7 +41,7 @@ class Star(gameScreen: GameScreen, initialPosition: Vector2) : Item(gameScreen) 
         setCenter(body.x, body.y)
     }
 
-    override fun use() {
+    override fun use(mario: Mario) {
         Gdx.app.postRunnable { gameScreen.items.remove(this) }
         Gdx.app.postRunnable { gameScreen.world.destroyBody(body) }
     }
@@ -51,12 +53,12 @@ class Star(gameScreen: GameScreen, initialPosition: Vector2) : Item(gameScreen) 
         }
     }
 
-    private fun defineFixtures(): FixturesMap {
-        val fixtures: FixturesMap = mutableMapOf()
-        fixtures[STAR] = body.box(width = 12f.toMeters(), height = 12f.toMeters()) {
-            filter.categoryBits = STAR_COLLISION_CATEGORY
+    private fun defineFixtures(): FixturesMap<StarFixtures> {
+        val fixtures: FixturesMap<StarFixtures> = mutableMapOf()
+        fixtures[BODY] = body.box(width = 12f.toMeters(), height = 12f.toMeters()) {
+            filter.categoryBits = ITEM_BIT
             filter.maskBits = STAR_COLLISION_MASK
-            userData = STAR
+            userData = BODY
         }
         return fixtures
     }

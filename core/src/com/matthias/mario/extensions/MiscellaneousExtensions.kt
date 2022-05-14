@@ -69,6 +69,12 @@ fun Vector2.sclToMeters(): Vector2 {
     return scl(1f.toMeters())
 }
 
+val Vector2.width
+    get() = x
+
+val Vector2.height
+    get() = y
+
 fun MapProperties.getContent(key: String, default: TileContent): TileContent {
     val value = get(key)
     if(value is String) {

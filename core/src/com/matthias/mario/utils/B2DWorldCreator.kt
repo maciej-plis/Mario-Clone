@@ -6,9 +6,9 @@ import com.badlogic.gdx.physics.box2d.Body
 import com.matthias.mario.common.OBJECT_BIT
 import com.matthias.mario.extensions.*
 import com.matthias.mario.screens.GameScreen
-import com.matthias.mario.sprites.tiles.Brick
 import com.matthias.mario.sprites.enemies.Goomba
 import com.matthias.mario.sprites.enemies.Koopa
+import com.matthias.mario.sprites.tiles.Brick
 import com.matthias.mario.sprites.tiles.MysteryBlock
 import ktx.box2d.body
 import ktx.box2d.box
