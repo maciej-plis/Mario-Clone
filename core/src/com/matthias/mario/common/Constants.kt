@@ -33,5 +33,6 @@ const val BRAKE_BLOCK_SOUND = "audio/sfx/breakblock.wav"
 const val POWER_UP_APPEARS_SOUND = "audio/sfx/powerup_appears.wav"
 const val MARIO_GROW_SOUND = "audio/sfx/powerup.wav"
 const val PIPE_SOUND = "audio/sfx/pipe.wav"
+const val STOMP_SOUND = "audio/sfx/stomp.wav"
 
 

@@ -92,7 +92,7 @@ class MarioSmallState(private val mario: Mario, position: Vector2) : MarioState 
                 filter.maskBits = MARIO_COLLISION_MASK
                 userData = FEET
             },
-            HEAD to body.edge(Vector2(-2f, 6f).sclToMeters(), Vector2(2f, 6f).sclToMeters()) {
+            HEAD to body.edge(Vector2(2f, 6f).sclToMeters(), Vector2(-2f, 6f).sclToMeters()) {
                 filter.categoryBits = MARIO_BIT
                 filter.maskBits = MARIO_COLLISION_MASK
                 userData = HEAD

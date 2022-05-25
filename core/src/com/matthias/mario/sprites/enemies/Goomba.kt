@@ -9,10 +9,7 @@ import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
 import com.badlogic.gdx.physics.box2d.Fixture
 import com.matthias.mario.common.*
-import com.matthias.mario.extensions.findRegions
-import com.matthias.mario.extensions.sclToMeters
-import com.matthias.mario.extensions.setCenter
-import com.matthias.mario.extensions.toMeters
+import com.matthias.mario.extensions.*
 import com.matthias.mario.screens.GameScreen
 import com.matthias.mario.sprites.enemies.Goomba.State.SQUASHED
 import com.matthias.mario.sprites.enemies.Goomba.State.WALKING
@@ -83,13 +80,15 @@ class Goomba(gameScreen: GameScreen, initialPosition: Vector2) : Enemy(gameScree
             return
         }
 
+        gameScreen.assetManager.getSound(STOMP_SOUND).play()
+
         currentState = SQUASHED
         stateTimer = 0f
 
         velocity.set(0f, 0f)
         setSize(squashedTexture.regionWidth.toMeters(), squashedTexture.regionHeight.toMeters())
 
-        Gdx.app.postRunnable {
+        Gdx.app.postRunnable() {
             body.destroyFixture(fixtures[GOOMBA_HEAD])
             body.destroyFixture(fixtures[GOOMBA_BODY])
             fixtures[GOOMBA_BODY] = body.box(width = 12f.toMeters(), height = 5f.toMeters()) {

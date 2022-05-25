@@ -26,7 +26,7 @@ class Mario(val gameScreen: GameScreen) : Sprite() {
         val MARIO_COLLISION_MASK = GROUND_BIT or BRICK_BIT or MYSTERY_BLOCK_BIT or ENEMY_BIT or OBJECT_BIT or ITEM_BIT
     }
 
-    private var marioState: MarioState = MarioSmallState(this, MARIO_INITIAL_POSITION)
+    var marioState: MarioState = MarioSmallState(this, MARIO_INITIAL_POSITION)
 
     private val frame: TextureRegion
         get() = marioState.frame.inDirection(direction)

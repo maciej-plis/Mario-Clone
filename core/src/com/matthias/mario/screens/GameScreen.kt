@@ -42,6 +42,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
         load(POWER_UP_APPEARS_SOUND, Sound::class.java)
         load(MARIO_GROW_SOUND, Sound::class.java)
         load(PIPE_SOUND, Sound::class.java)
+        load(STOMP_SOUND, Sound::class.java)
         finishLoading()
     }
 
@@ -100,7 +101,7 @@ class GameScreen(val game: MarioGame) : ScreenAdapter() {
     private fun update(delta: Float) {
         mario.handleInput()
 
-        world.step(1 / 60f, 6, 2)
+        world.step(1 / 60f, 8, 3)
 
         mario.update(delta)
 

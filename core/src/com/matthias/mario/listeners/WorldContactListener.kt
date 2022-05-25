@@ -27,10 +27,6 @@ class WorldContactListener : ContactListener {
             if(other.userData != null && other.userData is InteractiveTile) {
                 (other.userData as InteractiveTile).onHeadCollision()
             }
-        } else if((contact.fixtureA.userData == GOOMBA_HEAD || contact.fixtureB.userData == GOOMBA_HEAD)
-            && (contact.fixtureA.userData == FEET || contact.fixtureB.userData == FEET)) {
-            val goombaHead = if (contact.fixtureA.userData == GOOMBA_HEAD) contact.fixtureA else contact.fixtureB
-            (goombaHead.body.userData as Goomba).onHeadHit()
         }
 
         val cDef = contact.fixtureA.filterData.categoryBits or contact.fixtureB.filterData.categoryBits
@@ -46,9 +42,21 @@ class WorldContactListener : ContactListener {
             }
             ENEMY_BIT or MARIO_BIT -> {
                 if (contact.fixtureA.filterData.categoryBits == MARIO_BIT) {
-                    (contact.fixtureA.body.userData as Mario).shrink()
+                    if(contact.fixtureA.userData == FEET) {
+                        println("1) ENEMY HEAD HIT " + contact.fixtureA.userData + " - " + contact.fixtureB.userData)
+                        (contact.fixtureB.body.userData as Enemy).onHeadHit()
+                    } else {
+                        println("2) ENEMY NOT HEAD HIT " + contact.fixtureA.userData + " - " + contact.fixtureB.userData)
+                        (contact.fixtureA.body.userData as Mario).shrink()
+                    }
                 } else {
-                    (contact.fixtureB.body.userData as Mario).shrink()
+                    if(contact.fixtureB.userData == FEET) {
+                        println("3) ENEMY HEAD HIT " + contact.fixtureA.userData + " - " + contact.fixtureB.userData)
+                        (contact.fixtureA.body.userData as Enemy).onHeadHit()
+                    } else {
+                        println("4) ENEMY NOT HEAD HIT " + contact.fixtureA.userData + " - " + contact.fixtureB.userData)
+                        (contact.fixtureB.body.userData as Mario).shrink()
+                    }
                 }
             }
             ITEM_BIT or OBJECT_BIT -> {
